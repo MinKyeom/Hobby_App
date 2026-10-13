@@ -1,9 +1,8 @@
 import { create } from 'zustand';
 
 import { questionsByRole, startQuestionId } from '@/constants/questions';
-import type { ChoiceId, Question, QuizAnswer, Role } from '@/types/quiz';
+import type { AnimalCharacter, ChoiceId, Question, QuizAnswer, Role } from '@/types/quiz';
 import { resolveAnimal } from '@/utils/resolveResult';
-import type { AnimalCharacter } from '@/types/quiz';
 
 interface QuizState {
   role: Role | null;
@@ -12,6 +11,7 @@ interface QuizState {
   result: AnimalCharacter | null;
   startQuiz: (role: Role) => void;
   selectChoice: (choiceId: ChoiceId, nextId?: string) => void;
+  goBack: () => boolean;
   getCurrentQuestion: () => Question | null;
   reset: () => void;
 }
@@ -51,6 +51,19 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       currentQuestionId: null,
       result,
     });
+  },
+
+  goBack: () => {
+    const { answers } = get();
+    if (answers.length === 0) return false;
+
+    const previous = answers[answers.length - 1];
+    set({
+      answers: answers.slice(0, -1),
+      currentQuestionId: previous.questionId,
+      result: null,
+    });
+    return true;
   },
 
   getCurrentQuestion: () => {

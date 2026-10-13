@@ -10,13 +10,16 @@ import {
 } from '@expo-google-fonts/noto-sans-kr';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { colors } from '@/constants/theme';
 
 SplashScreen.preventAutoHideAsync().catch(() => undefined);
+
+const FONT_TIMEOUT_MS = 4000;
 
 export default function RootLayout() {
   const [nanumLoaded] = useNanumFonts({ NanumPenScript_400Regular });
@@ -25,8 +28,15 @@ export default function RootLayout() {
     NotoSansKR_500Medium,
     NotoSansKR_700Bold,
   });
+  const [timedOut, setTimedOut] = useState(false);
 
-  const ready = nanumLoaded && notoLoaded;
+  const fontsReady = nanumLoaded && notoLoaded;
+  const ready = fontsReady || timedOut;
+
+  useEffect(() => {
+    const timer = setTimeout(() => setTimedOut(true), FONT_TIMEOUT_MS);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (ready) {
@@ -40,14 +50,16 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <StatusBar style="dark" />
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: colors.bgBottom },
-          animation: 'fade_from_bottom',
-        }}
-      />
+      <ErrorBoundary>
+        <StatusBar style="dark" />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: colors.bgBottom },
+            animation: 'fade_from_bottom',
+          }}
+        />
+      </ErrorBoundary>
     </GestureHandlerRootView>
   );
 }

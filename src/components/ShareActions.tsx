@@ -11,18 +11,22 @@ interface Props {
 }
 
 const CHANNELS: { id: ShareChannel; label: string; hint: string }[] = [
-  { id: 'kakao', label: '카카오톡', hint: '결과 카드 이미지 공유' },
-  { id: 'twitter', label: 'X (트위터)', hint: '텍스트 + 이미지' },
-  { id: 'facebook', label: '페이스북', hint: '피드/스토리 공유' },
-  { id: 'instagram', label: '인스타그램', hint: '이미지로 공유' },
-  { id: 'system', label: '더 보기', hint: '시스템 공유 시트' },
+  { id: 'kakao', label: '카카오톡', hint: '공유 시트에서 선택' },
+  { id: 'twitter', label: 'X (트위터)', hint: '공유 시트에서 선택' },
+  { id: 'facebook', label: '페이스북', hint: '공유 시트에서 선택' },
+  { id: 'instagram', label: '인스타그램', hint: '공유 시트에서 선택' },
+  { id: 'system', label: '더 보기', hint: '모든 앱으로 공유' },
 ];
 
 export function ShareActions({ busy, onShare, onSave, onRetry }: Props) {
   return (
     <View style={styles.wrap}>
-      <Text style={styles.heading}>결과 공유하기</Text>
-      <Text style={styles.sub}>나의 소통 성향 동물 카드를 친구에게 보내보세요</Text>
+      <Text style={styles.heading} accessibilityRole="header">
+        결과 공유하기
+      </Text>
+      <Text style={styles.sub}>
+        결과 카드 이미지가 열리면, 원하는 SNS 앱을 골라 공유하세요
+      </Text>
 
       <View style={styles.grid}>
         {CHANNELS.map((ch) => (
@@ -30,6 +34,9 @@ export function ShareActions({ busy, onShare, onSave, onRetry }: Props) {
             key={ch.id}
             disabled={busy}
             onPress={() => onShare(ch.id)}
+            accessibilityRole="button"
+            accessibilityLabel={`${ch.label}으로 공유`}
+            accessibilityHint={ch.hint}
             style={({ pressed }) => [
               styles.channel,
               pressed && styles.pressed,
@@ -45,6 +52,8 @@ export function ShareActions({ busy, onShare, onSave, onRetry }: Props) {
       <Pressable
         disabled={busy}
         onPress={onSave}
+        accessibilityRole="button"
+        accessibilityLabel="결과 이미지 저장"
         style={({ pressed }) => [styles.secondary, pressed && styles.pressed]}
       >
         {busy ? (
@@ -54,7 +63,12 @@ export function ShareActions({ busy, onShare, onSave, onRetry }: Props) {
         )}
       </Pressable>
 
-      <Pressable onPress={onRetry} style={({ pressed }) => [styles.retry, pressed && styles.pressed]}>
+      <Pressable
+        onPress={onRetry}
+        accessibilityRole="button"
+        accessibilityLabel="다시 테스트하기"
+        style={({ pressed }) => [styles.retry, pressed && styles.pressed]}
+      >
         <Text style={styles.retryText}>다시 테스트하기</Text>
       </Pressable>
     </View>
@@ -73,6 +87,7 @@ const styles = StyleSheet.create({
   sub: {
     fontFamily: 'NotoSansKR_400Regular',
     fontSize: 13,
+    lineHeight: 20,
     color: colors.inkMuted,
     marginTop: -8,
   },
@@ -110,6 +125,8 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     alignItems: 'center',
     backgroundColor: colors.white,
+    minHeight: 52,
+    justifyContent: 'center',
   },
   secondaryText: {
     fontFamily: 'NotoSansKR_700Bold',

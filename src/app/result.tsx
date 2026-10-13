@@ -1,10 +1,11 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { EmptyRedirect } from '@/components/EmptyRedirect';
 import { ResultCard } from '@/components/ResultCard';
 import { ShareActions } from '@/components/ShareActions';
 import { RESULT_DISCLAIMER } from '@/constants/compliance';
@@ -19,14 +20,8 @@ export default function ResultScreen() {
   const cardRef = useRef<View>(null);
   const [busy, setBusy] = useState(false);
 
-  useEffect(() => {
-    if (!result) {
-      router.replace('/');
-    }
-  }, [result]);
-
   if (!result) {
-    return null;
+    return <EmptyRedirect message="결과가 없어요. 홈으로 이동해요" />;
   }
 
   const imageMeta = getAnimalImage(result);
@@ -62,7 +57,9 @@ export default function ResultScreen() {
           showsVerticalScrollIndicator={false}
         >
           <Animated.View entering={FadeIn.duration(400)}>
-            <Text style={styles.headline}>소통 성향 결과</Text>
+            <Text style={styles.headline} accessibilityRole="header">
+              소통 성향 결과
+            </Text>
             <ResultCard
               ref={cardRef}
               animal={result}
@@ -79,7 +76,9 @@ export default function ResultScreen() {
             />
           </View>
 
-          <Text style={styles.disclaimer}>{RESULT_DISCLAIMER}</Text>
+          <Text style={styles.disclaimer} accessibilityRole="text">
+            {RESULT_DISCLAIMER}
+          </Text>
         </ScrollView>
       </SafeAreaView>
     </LinearGradient>

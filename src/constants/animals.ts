@@ -226,7 +226,7 @@ export const ANIMALS: Record<string, AnimalCharacter> = {
     id: 'meerkat',
     role: 'employee',
     tier: 'bad',
-    emoji: '👀',
+    emoji: '🦡',
     title: '에너지를 아껴 쓰는 미어캣 유형',
     animalName: '미어캣',
     tags: ['#에너지관리', '#자율선호', '#응답리듬'],

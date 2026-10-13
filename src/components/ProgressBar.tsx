@@ -11,7 +11,12 @@ export function ProgressBar({ step }: Props) {
   const ratio = Math.min(step / TOTAL_STEPS, 1);
 
   return (
-    <View style={styles.wrap}>
+    <View
+      style={styles.wrap}
+      accessibilityRole="progressbar"
+      accessibilityLabel={`질문 진행률 ${step} / ${TOTAL_STEPS}`}
+      accessibilityValue={{ min: 0, max: TOTAL_STEPS, now: step }}
+    >
       <View style={styles.row}>
         <Text style={styles.label}>질문</Text>
         <Text style={styles.count}>

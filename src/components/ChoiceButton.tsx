@@ -30,6 +30,8 @@ export function ChoiceButton({ label, index, onPress }: Props) {
       onPressOut={() => {
         scale.value = withSpring(1);
       }}
+      accessibilityRole="button"
+      accessibilityLabel={`선택지 ${index === 0 ? 'A' : 'B'}: ${label}`}
       style={[styles.button, animatedStyle]}
     >
       <View style={styles.badge}>

@@ -1,7 +1,8 @@
+import * as Linking from 'expo-linking';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { PRIVACY_POLICY } from '@/constants/compliance';
+import { PRIVACY_POLICY, PRIVACY_POLICY_URL, SUPPORT_EMAIL } from '@/constants/compliance';
 import { colors, radii, spacing } from '@/constants/theme';
 
 interface Props {
@@ -17,7 +18,7 @@ export function PrivacyModal({ visible, onClose }: Props) {
       <View style={[styles.container, { paddingTop: insets.top + spacing.md, paddingBottom: insets.bottom + spacing.md }]}>
         <View style={styles.header}>
           <Text style={styles.title}>{PRIVACY_POLICY.title}</Text>
-          <Pressable onPress={onClose} hitSlop={12}>
+          <Pressable onPress={onClose} hitSlop={12} accessibilityRole="button" accessibilityLabel="닫기">
             <Text style={styles.close}>닫기</Text>
           </Pressable>
         </View>
@@ -29,6 +30,20 @@ export function PrivacyModal({ visible, onClose }: Props) {
               <Text style={styles.text}>{section.body}</Text>
             </View>
           ))}
+          <Pressable
+            onPress={() => Linking.openURL(PRIVACY_POLICY_URL)}
+            accessibilityRole="link"
+            style={styles.linkBtn}
+          >
+            <Text style={styles.linkText}>웹에서 개인정보 처리방침 보기</Text>
+          </Pressable>
+          <Pressable
+            onPress={() => Linking.openURL(`mailto:${SUPPORT_EMAIL}`)}
+            accessibilityRole="link"
+            style={styles.linkBtn}
+          >
+            <Text style={styles.linkText}>문의 메일: {SUPPORT_EMAIL}</Text>
+          </Pressable>
         </ScrollView>
       </View>
     </Modal>
@@ -85,5 +100,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 22,
     color: colors.inkMuted,
+  },
+  linkBtn: {
+    paddingVertical: spacing.sm,
+  },
+  linkText: {
+    fontFamily: 'NotoSansKR_500Medium',
+    fontSize: 14,
+    color: colors.accent,
+    textDecorationLine: 'underline',
   },
 });

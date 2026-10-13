@@ -4,26 +4,32 @@
 - [x] 컨셉: 소통 성향 심리 테스트 (비방/뒷담화 도구 아님)
 - [x] 실명·회사명·직책 Input 없음
 - [x] 부정 유형도 「유형 설명 + 소통 팁」 프레이밍
+- [x] 질문/선택지 톤 완화 (관찰형 표현)
 - [x] 결과 하단 고정 면책 문구
 
 ## 2. Apple 4.2 Minimum Functionality
-- [x] 네이티브 화면 전환 애니메이션 (Reanimated)
-- [x] Progress Bar + 질문 카운트
-- [x] 결과 카드 PNG 저장 (view-shot + media-library)
-- [x] OS 시스템 공유 (카카오톡/X/Facebook/Instagram 선택)
+- [x] 네이티브 화면 전환 애니메이션
+- [x] Progress Bar + 질문 카운트 + 이전 문항
+- [x] 결과 카드 PNG 저장
+- [x] OS 시스템 공유 (카카오톡 등 앱 선택)
 - [x] 다시 테스트 → 메인 이동
-
-> 카카오톡: Expo Go 호환을 위해 OS Share Sheet 경유. 카카오 커스텀 템플릿이 필요하면 개발 빌드 + Kakao SDK 추가.
+- [x] Error Boundary / 빈 화면 리다이렉트
 
 ## 3. 미디어 / 저작권
-- [x] Pexels 상업 이용 가능 동물 사진만 로컬 패키징 (`assets/animals/`)
+- [x] Pexels 동물 사진 로컬 패키징 (`assets/animals/`)
 - [x] 사람 얼굴·브랜드 로고 배제 큐레이션
 - [x] 카드에 Pexels 출처 표기
 
 ## 4. 개인정보
-- [x] Guest Mode Only (회원가입/로그인 없음)
-- [x] 불필요 권한 미요청 (저장 시에만 갤러리)
-- [x] 개인정보 처리방침 모달 (홈 하단 링크)
+- [x] Guest Mode Only
+- [x] 저장 시에만 갤러리 권한
+- [x] 인앱 개인정보 처리방침 모달
+- [x] `public/privacy.html` (스토어용 HTTPS 호스팅 필요)
+- [ ] 실제 문의 이메일 / 공개 URL 배포 (배포자 작업)
 
 ## 5. UGC
-- [x] v1.0 질문/평가 생성·편집 기능 없음 (고정 5문항 트리)
+- [x] v1.0 질문 생성·편집 없음 (고정 5문항)
+
+## 출시 판정
+- **데모 / 소프트런치:** 가능에 가까움
+- **스토어 정식 제출:** EAS·정책 URL·문의메일·스크린샷·계정 설정 후

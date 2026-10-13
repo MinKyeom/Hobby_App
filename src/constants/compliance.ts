@@ -5,6 +5,17 @@ export const RESULT_DISCLAIMER =
 export const APP_PURPOSE =
   '직장인 소통 성향을 유쾌한 동물 유형으로 살펴보는 심리 테스트입니다. 특정인을 비방·뒷담화하는 도구가 아닙니다.';
 
+/** 스토어 리스팅·문의용 — 배포 전 실제 이메일로 교체하세요 */
+export const SUPPORT_EMAIL = 'support@example.com';
+
+/**
+ * 스토어 제출 시 필수: 이 URL을 GitHub Pages 등으로 호스팅한 뒤
+ * Play Console / App Store Connect에 등록하세요.
+ * 로컬 파일: /public/privacy.html
+ */
+export const PRIVACY_POLICY_URL =
+  'https://minkyeom.github.io/Hobby_App/privacy.html';
+
 export const PRIVACY_POLICY = {
   title: '개인정보 처리방침',
   updatedAt: '2026-10-14',
@@ -23,11 +34,11 @@ export const PRIVACY_POLICY = {
     },
     {
       heading: '4. 공유 기능',
-      body: '결과 공유는 OS 시스템 공유 시트 또는 사용자가 선택한 SNS 앱을 통해 이루어집니다. 공유 내용은 사용자가 직접 선택·전송하며, 본 앱이 SNS 계정을 연동하거나 게시물을 대리 업로드하지 않습니다.',
+      body: '결과 공유는 OS 시스템 공유 시트를 통해 이루어집니다. 공유 내용은 사용자가 직접 선택·전송하며, 본 앱이 SNS 계정을 연동하거나 게시물을 대리 업로드하지 않습니다.',
     },
     {
       heading: '5. 문의',
-      body: '개인정보 관련 문의는 앱 스토어 개발자 연락처 또는 GitHub 저장소(Hobby_App) 이슈로 남겨 주세요.',
+      body: `개인정보 관련 문의: ${SUPPORT_EMAIL}`,
     },
   ],
 } as const;

@@ -2,6 +2,7 @@ import type { Question, Role } from '@/types/quiz';
 
 export const TOTAL_STEPS = 5;
 
+/** 선택지 톤: 관찰·성향 묘사 중심 (인신공격/비하 표현 지양) */
 const bossQuestions: Question[] = [
   {
     id: 'boss-q1',
@@ -15,7 +16,7 @@ const bossQuestions: Question[] = [
       },
       {
         id: 'B',
-        label: '"??? 이거 언제 됨?" 다짜고짜 독촉 및 단답형',
+        label: '인사 없이 짧은 독촉형으로 바로 진행 상황을 묻는다.',
         nextId: 'boss-q2b',
       },
     ],
@@ -27,12 +28,12 @@ const bossQuestions: Question[] = [
     choices: [
       {
         id: 'A1',
-        label: '팀원들의 호불호나 식성을 배려해서 결단력 있게 정한다.',
+        label: '팀원들의 호불호를 배려해서 결단력 있게 정한다.',
         nextId: 'boss-q3a1',
       },
       {
         id: 'A2',
-        label: '"아무거나 먹자" 해놓고 막상 제안하면 은근히 다 거절한다.',
+        label: '"아무거나"라고 해놓고 제안에는 계속 망설인다.',
         nextId: 'boss-q3a2',
       },
     ],
@@ -44,12 +45,12 @@ const bossQuestions: Question[] = [
     choices: [
       {
         id: 'B1',
-        label: '지시 사항이 수시로 바뀌고 본인이 했던 말을 자주 번복한다.',
+        label: '지시가 자주 바뀌고 방향을 다시 조정하는 편이다.',
         nextId: 'boss-q3b1',
       },
       {
         id: 'B2',
-        label: '세세한 것 하나까지 본인 뜻대로 해야 하는 마이크로 매니징을 한다.',
+        label: '세부 사항까지 직접 확인하고 싶어 하는 편이다.',
         nextId: 'boss-q3b2',
       },
     ],
@@ -61,12 +62,12 @@ const bossQuestions: Question[] = [
     choices: [
       {
         id: 'A1',
-        label: '"내가 책임질 테니 해결책부터 찾아보자."하며 앞장선다.',
+        label: '"해결책부터 찾아보자"며 함께 앞장선다.',
         nextId: 'boss-q4a',
       },
       {
         id: 'A2',
-        label: '비난은 안 하지만 은근히 한숨을 쉬며 눈치를 준다.',
+        label: '비난은 않지만 한숨·표정으로 아쉬움을 드러낸다.',
         nextId: 'boss-q4a',
       },
     ],
@@ -78,12 +79,12 @@ const bossQuestions: Question[] = [
     choices: [
       {
         id: 'A1',
-        label: '"내가 책임질 테니 해결책부터 찾아보자."하며 앞장선다.',
+        label: '"해결책부터 찾아보자"며 함께 앞장선다.',
         nextId: 'boss-q4a',
       },
       {
         id: 'A2',
-        label: '비난은 안 하지만 은근히 한숨을 쉬며 눈치를 준다.',
+        label: '비난은 없지만 한숨·표정으로 아쉬움을 드러낸다.',
         nextId: 'boss-q4a',
       },
     ],
@@ -91,16 +92,16 @@ const bossQuestions: Question[] = [
   {
     id: 'boss-q3b1',
     step: 3,
-    prompt: '팀원을 혼내거나 지적해야 할 때 상사의 행동은?',
+    prompt: '팀원에게 피드백을 줄 때 상사의 방식은?',
     choices: [
       {
         id: 'B1',
-        label: '사람들이 다 보는 공개적인 장소에서 혼낸다.',
+        label: '여러 사람이 있는 자리에서 바로 피드백한다.',
         nextId: 'boss-q4b',
       },
       {
         id: 'B2',
-        label: '부하를 라이벌처럼 보고 견제하며 은근히 손해를 보게 만든다.',
+        label: '경쟁 의식을 드러내며 관계가 긴장되는 편이다.',
         nextId: 'boss-q4b',
       },
     ],
@@ -108,16 +109,16 @@ const bossQuestions: Question[] = [
   {
     id: 'boss-q3b2',
     step: 3,
-    prompt: '팀원을 혼내거나 지적해야 할 때 상사의 행동은?',
+    prompt: '팀원에게 피드백을 줄 때 상사의 방식은?',
     choices: [
       {
         id: 'B1',
-        label: '사람들이 다 보는 공개적인 장소에서 혼낸다.',
+        label: '여러 사람이 있는 자리에서 바로 피드백한다.',
         nextId: 'boss-q4b',
       },
       {
         id: 'B2',
-        label: '부하를 라이벌처럼 보고 견제하며 은근히 손해를 보게 만든다.',
+        label: '경쟁 의식을 드러내며 관계가 긴장되는 편이다.',
         nextId: 'boss-q4b',
       },
     ],
@@ -129,12 +130,12 @@ const bossQuestions: Question[] = [
     choices: [
       {
         id: 'A1',
-        label: '단둘이 불러 감정을 빼고 원인과 개선방안 중심으로 피드백한다.',
+        label: '단둘이 불러 원인과 개선안 중심으로 피드백한다.',
         nextId: 'boss-q5a',
       },
       {
         id: 'A2',
-        label: '다른 상사를 욕하면서 은근슬쩍 본인 업무를 나에게 떠넘긴다.',
+        label: '다른 팀 이야기를 하다 업무가 자연스럽게 넘어오기도 한다.',
         nextId: 'boss-q5a',
       },
     ],
@@ -142,16 +143,16 @@ const bossQuestions: Question[] = [
   {
     id: 'boss-q4b',
     step: 4,
-    prompt: '다른 상사나 팀에 대한 이야기를 할 때 모습은?',
+    prompt: '다른 팀이나 상사에 대해 이야기할 때 모습은?',
     choices: [
       {
         id: 'B1',
-        label: '다른 상사를 욕하면서 은근슬쩍 본인 업무를 나에게 떠넘긴다.',
+        label: '다른 팀 이슈를 말하다 업무가 나에게 넘어오는 경우가 있다.',
         nextId: 'boss-q5b',
       },
       {
         id: 'B2',
-        label: '은근히 뒷말을 퍼뜨리거나 한쪽 편만 들어 팀 내 갈등을 키운다.',
+        label: '한쪽 입장에 기울어 팀 분위기가 나뉠 때가 있다.',
         nextId: 'boss-q5b',
       },
     ],
@@ -163,11 +164,11 @@ const bossQuestions: Question[] = [
     choices: [
       {
         id: 'A1',
-        label: '"오늘 다들 고생 많았어요!" 하고 정시 퇴근을 권장한다.',
+        label: '"오늘 고생 많았어요!" 하며 정시 퇴근을 권장한다.',
       },
       {
         id: 'A2',
-        label: '모두를 챙겨줄 때 특정 팀원만 은근히 빼놓고 손해를 보게 만든다.',
+        label: '챙김의 온도가 사람마다 달라 보이는 편이다.',
       },
     ],
   },
@@ -178,11 +179,11 @@ const bossQuestions: Question[] = [
     choices: [
       {
         id: 'B1',
-        label: '급하지도 않은 일로 주말이나 늦은 밤에 수시로 카톡을 보낸다.',
+        label: '급하지 않은 일도 주말·밤에 메시지로 묻는 편이다.',
       },
       {
         id: 'B2',
-        label: '퇴근 직전에 갑자기 새 일을 던져주며 탕비실로 부른다.',
+        label: '퇴근 직전에 새 업무를 짧게 전달하는 편이다.',
       },
     ],
   },
@@ -201,7 +202,7 @@ const employeeQuestions: Question[] = [
       },
       {
         id: 'B',
-        label: '표정이 어두워지며 "이걸 제가 왜 해야 하나요?"라는 태도를 보인다.',
+        label: '부담을 드러내며 역할·이유부터 확인하려는 태도를 보인다.',
         nextId: 'emp-q2b',
       },
     ],
@@ -218,7 +219,7 @@ const employeeQuestions: Question[] = [
       },
       {
         id: 'A2',
-        label: '다 끝난 후에야 한 번에 가져와서 결과만 보여준다.',
+        label: '끝난 뒤에 한 번에 결과만 보여주는 편이다.',
         nextId: 'emp-q3a2',
       },
     ],
@@ -230,12 +231,12 @@ const employeeQuestions: Question[] = [
     choices: [
       {
         id: 'B1',
-        label: '일을 진작에 끝냈음에도 일부러 미루다 늦게 준다.',
+        label: '완료 후에도 공유 페이스가 느린 편이다.',
         nextId: 'emp-q3b1',
       },
       {
         id: 'B2',
-        label: '핑계를 대며 마감을 넘기거나 완성도가 엉망인 결과물을 낸다.',
+        label: '마감이 밀리거나 완성도가 들쭉날쭉한 편이다.',
         nextId: 'emp-q3b2',
       },
     ],
@@ -252,7 +253,7 @@ const employeeQuestions: Question[] = [
       },
       {
         id: 'A2',
-        label: '혼자 어떻게든 막아보려다 일을 더 크게 만든다.',
+        label: '혼자 먼저 해결하려다 범위가 커질 때가 있다.',
         nextId: 'emp-q4a',
       },
     ],
@@ -269,7 +270,7 @@ const employeeQuestions: Question[] = [
       },
       {
         id: 'A2',
-        label: '혼자 어떻게든 막아보려다 일을 더 크게 만든다.',
+        label: '혼자 먼저 해결하려다 범위가 커질 때가 있다.',
         nextId: 'emp-q4a',
       },
     ],
@@ -277,16 +278,16 @@ const employeeQuestions: Question[] = [
   {
     id: 'emp-q3b1',
     step: 3,
-    prompt: '팀 분위기가 어수선하거나 야근 중일 때 행동은?',
+    prompt: '팀 분위기가 바쁘거나 야근 중일 때 행동은?',
     choices: [
       {
         id: 'B1',
-        label: '모두가 정신없이 일하는 와중에 눈치를 보며 은근슬쩍 퇴근한다.',
+        label: '바쁜 날에도 자신의 페이스로 먼저 자리를 정리하는 편이다.',
         nextId: 'emp-q4b',
       },
       {
         id: 'B2',
-        label: '지각이 잦고 업무 시간에 자리를 비워 메신저 답장이 느리다.',
+        label: '자리·응답 리듬이 들쭉날쭉한 편이다.',
         nextId: 'emp-q4b',
       },
     ],
@@ -294,16 +295,16 @@ const employeeQuestions: Question[] = [
   {
     id: 'emp-q3b2',
     step: 3,
-    prompt: '팀 분위기가 어수선하거나 야근 중일 때 행동은?',
+    prompt: '팀 분위기가 바쁘거나 야근 중일 때 행동은?',
     choices: [
       {
         id: 'B1',
-        label: '모두가 정신없이 일하는 와중에 눈치를 보며 은근슬쩍 퇴근한다.',
+        label: '바쁜 날에도 자신의 페이스로 먼저 자리를 정리하는 편이다.',
         nextId: 'emp-q4b',
       },
       {
         id: 'B2',
-        label: '지각이 잦고 업무 시간에 자리를 비워 메신저 답장이 느리다.',
+        label: '자리·응답 리듬이 들쭉날쭉한 편이다.',
         nextId: 'emp-q4b',
       },
     ],
@@ -320,7 +321,7 @@ const employeeQuestions: Question[] = [
       },
       {
         id: 'A2',
-        label: '일을 다 끝냈음에도 일부러 시간을 끌다 늦게 준다.',
+        label: '끝난 뒤에도 공유까지 시간이 걸리는 편이다.',
         nextId: 'emp-q5a',
       },
     ],
@@ -328,16 +329,16 @@ const employeeQuestions: Question[] = [
   {
     id: 'emp-q4b',
     step: 4,
-    prompt: '피드백이나 지적을 받았을 때 반응은?',
+    prompt: '피드백을 받았을 때 반응은?',
     choices: [
       {
         id: 'B1',
-        label: '핑계와 변명으로 일관하며 남 탓을 한다.',
+        label: '먼저 맥락·사유를 설명하려는 경향이 있다.',
         nextId: 'emp-q5b',
       },
       {
         id: 'B2',
-        label: '기분 나쁜 티를 팍팍 내며 분위기를 냉랭하게 만든다.',
+        label: '표정이 굳어지며 대화 온도가 낮아지는 편이다.',
         nextId: 'emp-q5b',
       },
     ],
@@ -349,11 +350,11 @@ const employeeQuestions: Question[] = [
     choices: [
       {
         id: 'A1',
-        label: '도움이 필요한 부분이 있는지 묻고 적극적으로 협조한다.',
+        label: '도움이 필요한지 묻고 적극적으로 협조한다.',
       },
       {
         id: 'A2',
-        label: '모두가 바쁘게 일할 때 눈치를 보며 은근슬쩍 먼저 퇴근한다.',
+        label: '자신의 에너지를 먼저 관리하며 자리를 정리하는 편이다.',
       },
     ],
   },
@@ -364,11 +365,11 @@ const employeeQuestions: Question[] = [
     choices: [
       {
         id: 'B1',
-        label: '핸드폰만 보며 영혼 없이 앉아있다가 제일 먼저 도망간다.',
+        label: '자리에 있어도 개인 리듬을 유지하며 일찍 자리를 뜬다.',
       },
       {
         id: 'B2',
-        label: '분위기를 흐리거나 개인주의적인 태도로 일관한다.',
+        label: '단체 자리보다 개인 공간을 더 중요하게 여기는 편이다.',
       },
     ],
   },
