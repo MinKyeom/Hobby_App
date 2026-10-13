@@ -1,0 +1,73 @@
+{
+  "expo": {
+    "name": "직장 동물 농장",
+    "slug": "workplace-animal-farm",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "workplaceanimalfarm",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#E8F2E4"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.minkyeom.workplaceanimalfarm",
+      "infoPlist": {
+        "NSPhotoLibraryAddUsageDescription": "결과 카드를 사진첩에 저장하기 위해 권한이 필요합니다.",
+        "NSPhotoLibraryUsageDescription": "결과 카드를 사진첩에 저장하기 위해 권한이 필요합니다.",
+        "LSApplicationQueriesSchemes": [
+          "kakaotalk",
+          "kakaokompassauth",
+          "twitter",
+          "fb",
+          "instagram"
+        ]
+      }
+    },
+    "android": {
+      "package": "com.minkyeom.workplaceanimalfarm",
+      "adaptiveIcon": {
+        "backgroundColor": "#E8F2E4",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": [
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ],
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-sharing",
+      "expo-image",
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "결과 카드를 사진첩에 저장하기 위해 권한이 필요합니다.",
+          "savePhotosPermission": "결과 카드를 사진첩에 저장하기 위해 권한이 필요합니다.",
+          "isAccessMediaLocationEnabled": false
+        }
+      ],
+      "expo-splash-screen"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "replace-with-eas-project-id"
+      }
+    }
+  }
+}
