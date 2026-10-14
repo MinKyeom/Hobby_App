@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import { LinearGradient } from 'expo-linear-gradient';
 import { forwardRef } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -20,22 +21,28 @@ export const ResultCard = forwardRef<View, Props>(function ResultCard(
   ref,
 ) {
   const roleLabel = role === 'boss' ? '상사편' : '부하편';
+  const artBg =
+    role === 'boss'
+      ? (['#FFE8DC', '#FFF6E8', '#E8F8F4'] as const)
+      : (['#DFF3F0', '#EAF6FF', '#FFF6E8'] as const);
 
   return (
     <View ref={ref} collapsable={false} style={styles.card}>
       <Text style={styles.brand}>{APP_NAME_SHORT}</Text>
-      <Text style={styles.kicker}>{roleLabel} · 소통 동물 카드</Text>
-      <View style={styles.imageWrap}>
-        <Image source={animal.localImage} style={styles.image} contentFit="cover" />
-        <View style={styles.emojiBadge}>
-          <Text style={styles.emoji}>{animal.emoji}</Text>
+      <Text style={styles.kicker}>{roleLabel} · 웃긴 동물 일러스트 카드</Text>
+
+      <LinearGradient colors={[...artBg]} style={styles.imageWrap}>
+        <Image
+          source={animal.localImage}
+          style={styles.image}
+          contentFit="contain"
+          accessibilityLabel={`${animal.animalName} 일러스트`}
+        />
+        <View style={styles.tierChip}>
+          <Text style={styles.tierText}>{animal.tier.toUpperCase()}</Text>
         </View>
-        <View style={styles.nameRibbon}>
-          <Text style={styles.nameRibbonText}>
-            {animal.emoji} {animal.animalName}
-          </Text>
-        </View>
-      </View>
+      </LinearGradient>
+
       <Text style={styles.intro}>당신은</Text>
       <Text style={styles.animalNameBig}>
         {animal.emoji} {animal.animalName}
@@ -63,7 +70,7 @@ export const ResultCard = forwardRef<View, Props>(function ResultCard(
         </View>
       ) : null}
       <Text style={styles.credit}>
-        Photo: {photographer} / {animal.creditSource}
+        Illustration: {photographer} ({animal.creditSource}) · CC BY-SA 4.0
       </Text>
     </View>
   );
@@ -97,45 +104,32 @@ const styles = StyleSheet.create({
     marginTop: -4,
   },
   imageWrap: {
-    height: 280,
+    height: 260,
     borderRadius: radii.lg,
     overflow: 'hidden',
-    backgroundColor: colors.accentSoft,
     marginVertical: spacing.sm,
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-  emojiBadge: {
-    position: 'absolute',
-    right: 12,
-    bottom: 12,
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    backgroundColor: colors.cream,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 2,
-    borderColor: colors.sunny,
+    borderWidth: 1,
+    borderColor: colors.line,
   },
-  emoji: {
-    fontSize: 28,
+  image: {
+    width: '72%',
+    height: '72%',
   },
-  nameRibbon: {
+  tierChip: {
     position: 'absolute',
-    left: 12,
-    top: 12,
-    backgroundColor: 'rgba(31, 138, 122, 0.92)',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    right: 10,
+    bottom: 10,
+    backgroundColor: colors.sunny,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
     borderRadius: radii.pill,
   },
-  nameRibbonText: {
+  tierText: {
     fontFamily: 'NotoSansKR_700Bold',
-    fontSize: 13,
-    color: colors.white,
+    fontSize: 11,
+    color: colors.ink,
   },
   intro: {
     fontFamily: 'NotoSansKR_400Regular',

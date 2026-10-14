@@ -42,3 +42,8 @@ src/constants/      # brand, abilities, questions, animals
 src/components/     # ResultCard, AbilityBars, Share…
 src/utils/          # abilities 점수, 결과 매칭, 공유
 ```
+
+## 동물 일러스트
+
+결과 카드 이미지는 [OpenMoji](https://openmoji.org/) (CC BY-SA 4.0, 상업적 이용 가능 · 출처 표기).  
+로컬: `assets/animals/illustrations/` · 상세: `assets/animals/illustrations/ATTRIBUTION.md`
