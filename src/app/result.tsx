@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import Animated, { FadeIn, FadeInUp } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EmptyRedirect } from '@/components/EmptyRedirect';
@@ -50,7 +50,7 @@ export default function ResultScreen() {
   };
 
   return (
-    <LinearGradient colors={[colors.bgTop, colors.bgBottom]} style={styles.flex}>
+    <LinearGradient colors={[colors.bgTop, colors.bgMid, colors.bgBottom]} style={styles.flex}>
       <SafeAreaView style={styles.safe}>
         <ScrollView
           contentContainerStyle={styles.scroll}
@@ -58,8 +58,9 @@ export default function ResultScreen() {
         >
           <Animated.View entering={FadeIn.duration(400)}>
             <Text style={styles.headline} accessibilityRole="header">
-              소통 성향 결과
+              짠! 당신의 동물은
             </Text>
+            <Text style={styles.subhead}>{result.emoji} {result.animalName}</Text>
             <ResultCard
               ref={cardRef}
               animal={result}
@@ -67,14 +68,14 @@ export default function ResultScreen() {
             />
           </Animated.View>
 
-          <View style={styles.shareBlock}>
+          <Animated.View entering={FadeInUp.delay(120).duration(400)} style={styles.shareBlock}>
             <ShareActions
               busy={busy}
               onShare={onShare}
               onSave={onSave}
               onRetry={onRetry}
             />
-          </View>
+          </Animated.View>
 
           <Text style={styles.disclaimer} accessibilityRole="text">
             {RESULT_DISCLAIMER}
@@ -99,7 +100,14 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: colors.accent,
     textAlign: 'center',
+  },
+  subhead: {
+    fontFamily: 'NotoSansKR_700Bold',
+    fontSize: 20,
+    color: colors.ink,
+    textAlign: 'center',
     marginBottom: spacing.md,
+    marginTop: 4,
   },
   shareBlock: {
     marginTop: spacing.sm,

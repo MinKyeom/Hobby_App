@@ -1,14 +1,14 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useEffect } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeInRight } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ChoiceButton } from '@/components/ChoiceButton';
 import { EmptyRedirect } from '@/components/EmptyRedirect';
 import { ProgressBar } from '@/components/ProgressBar';
-import { colors, spacing } from '@/constants/theme';
+import { colors, radii, spacing } from '@/constants/theme';
 import { useQuizStore } from '@/store/quizStore';
 
 export default function QuizScreen() {
@@ -41,7 +41,7 @@ export default function QuizScreen() {
   const canGoBack = answers.length > 0;
 
   return (
-    <LinearGradient colors={[colors.bgTop, colors.bgBottom]} style={styles.flex}>
+    <LinearGradient colors={[colors.bgTop, colors.bgMid, colors.bgBottom]} style={styles.flex}>
       <SafeAreaView style={styles.safe}>
         <View style={styles.top}>
           <View style={styles.navRow}>
@@ -75,28 +75,38 @@ export default function QuizScreen() {
           <ProgressBar step={question.step} />
         </View>
 
-        <Animated.View
-          key={currentQuestionId}
-          entering={FadeInRight.duration(280)}
-          style={styles.body}
+        <ScrollView
+          style={styles.scroll}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
         >
-          <Text style={styles.roleTag}>
-            {role === 'boss' ? '🦁 상사 소통 성향' : '🐝 부하 직원 소통 성향'}
-          </Text>
-          <Text style={styles.prompt} accessibilityRole="header">
-            {question.prompt}
-          </Text>
-          <View style={styles.choices}>
-            {question.choices.map((choice, index) => (
-              <ChoiceButton
-                key={`${question.id}-${choice.id}`}
-                label={choice.label}
-                index={index}
-                onPress={() => selectChoice(choice.id, choice.nextId)}
-              />
-            ))}
-          </View>
-        </Animated.View>
+          <Animated.View
+            key={currentQuestionId}
+            entering={FadeInRight.duration(280)}
+            style={styles.body}
+          >
+            <View style={styles.rolePill}>
+              <Text style={styles.roleTag}>
+                {role === 'boss' ? '🦁 상사 소통 성향' : '🐝 부하 직원 소통 성향'}
+              </Text>
+            </View>
+            <Text style={styles.prompt} accessibilityRole="header">
+              {question.prompt}
+            </Text>
+            <Text style={styles.hint}>가장 가까운 답을 골라 주세요 · 선택에 따라 다음 질문이 달라져요</Text>
+            <View style={styles.choices}>
+              {question.choices.map((choice, index) => (
+                <ChoiceButton
+                  key={`${question.id}-${choice.id}`}
+                  label={choice.label}
+                  emoji={choice.emoji}
+                  index={index}
+                  onPress={() => selectChoice(choice.id, choice.nextId, choice.scores)}
+                />
+              ))}
+            </View>
+          </Animated.View>
+        </ScrollView>
       </SafeAreaView>
     </LinearGradient>
   );
@@ -107,7 +117,7 @@ const styles = StyleSheet.create({
   safe: {
     flex: 1,
     paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.lg,
+    paddingBottom: spacing.sm,
   },
   top: {
     gap: spacing.md,
@@ -128,10 +138,22 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.accent,
   },
+  scroll: { flex: 1 },
+  scrollContent: {
+    paddingBottom: spacing.xxl,
+  },
   body: {
-    flex: 1,
     paddingTop: spacing.xl,
-    gap: spacing.lg,
+    gap: spacing.md,
+  },
+  rolePill: {
+    alignSelf: 'flex-start',
+    backgroundColor: colors.cream,
+    borderRadius: radii.pill,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderWidth: 1,
+    borderColor: colors.line,
   },
   roleTag: {
     fontFamily: 'NotoSansKR_500Medium',
@@ -143,6 +165,13 @@ const styles = StyleSheet.create({
     fontSize: 22,
     lineHeight: 34,
     color: colors.ink,
+  },
+  hint: {
+    fontFamily: 'NotoSansKR_400Regular',
+    fontSize: 13,
+    lineHeight: 20,
+    color: colors.inkMuted,
+    marginTop: -4,
   },
   choices: {
     gap: spacing.md,

@@ -1,15 +1,16 @@
 export type Role = 'boss' | 'employee';
 
-export type Track = 'A' | 'B';
-
-export type ChoiceId = 'A' | 'B' | 'A1' | 'A2' | 'B1' | 'B2';
+export type ChoiceId = string;
 
 export type AnimalTier = 'best' | 'good' | 'mixed' | 'bad';
 
 export interface Choice {
   id: ChoiceId;
   label: string;
+  emoji?: string;
   nextId?: string;
+  /** 선택 시 동물 점수 가산 (결과 매칭용) */
+  scores: Record<string, number>;
 }
 
 export interface Question {
@@ -32,13 +33,15 @@ export interface AnimalCharacter {
   pexelsQuery: string;
   /** Legacy/CDN reference (심사·오프라인은 localImage 우선) */
   imageUrl: string;
-  /** Bundled Pexels animal photo (no human faces / trademarks) */
+  /** Bundled commercial-free animal photo */
   localImage: number;
   photographer: string;
   photographerUrl: string;
+  creditSource: 'Pexels' | 'Pixabay';
 }
 
 export interface QuizAnswer {
   questionId: string;
   choiceId: ChoiceId;
+  scores: Record<string, number>;
 }

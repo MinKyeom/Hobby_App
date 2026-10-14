@@ -21,47 +21,70 @@ export default function HomeScreen() {
   };
 
   return (
-    <LinearGradient colors={[colors.bgTop, colors.bgBottom]} style={styles.flex}>
+    <LinearGradient colors={[colors.bgTop, colors.bgMid, colors.bgBottom]} style={styles.flex}>
       <SafeAreaView style={styles.safe}>
         <View style={styles.hero}>
-          <Animated.Text entering={FadeInDown.duration(500)} style={styles.brand}>
+          <Animated.View entering={FadeInDown.duration(450)} style={styles.blobRow}>
+            <Text style={styles.blob}>🦁</Text>
+            <Text style={styles.blob}>🐼</Text>
+            <Text style={styles.blob}>🐧</Text>
+            <Text style={styles.blob}>🦊</Text>
+          </Animated.View>
+          <Animated.Text entering={FadeInDown.delay(60).duration(500)} style={styles.brand}>
             직장 동물 농장
           </Animated.Text>
-          <Animated.Text entering={FadeInDown.delay(80).duration(500)} style={styles.title}>
+          <Animated.Text entering={FadeInDown.delay(120).duration(500)} style={styles.title}>
             나는 어떤 동물일까?
           </Animated.Text>
-          <Animated.Text entering={FadeInDown.delay(140).duration(500)} style={styles.subtitle}>
-            상사 & 부하 직원 소통 성향 심리 테스트
+          <Animated.Text entering={FadeInDown.delay(180).duration(500)} style={styles.subtitle}>
+            선택마다 질문이 달라지는 5문항 소통 성향 테스트
           </Animated.Text>
-          <Animated.Text entering={FadeInDown.delay(200).duration(500)} style={styles.note}>
+          <Animated.View entering={FadeInDown.delay(220).duration(500)} style={styles.chipRow}>
+            <View style={styles.chip}>
+              <Text style={styles.chipText}>24종 동물</Text>
+            </View>
+            <View style={[styles.chip, styles.chipAlt]}>
+              <Text style={styles.chipText}>분기형 퀴즈</Text>
+            </View>
+            <View style={[styles.chip, styles.chipSun]}>
+              <Text style={styles.chipText}>웃긴 동물 카드</Text>
+            </View>
+          </Animated.View>
+          <Animated.Text entering={FadeInDown.delay(260).duration(500)} style={styles.note}>
             {APP_PURPOSE}
           </Animated.Text>
-          <Animated.Text entering={FadeInDown.delay(240).duration(500)} style={styles.guest}>
-            회원가입·로그인 없이 바로 시작 · 실명/회사명 입력 없음
+          <Animated.Text entering={FadeInDown.delay(300).duration(500)} style={styles.guest}>
+            회원가입 없이 바로 · 실명/회사명 입력 없음
           </Animated.Text>
         </View>
 
-        <Animated.View entering={FadeInUp.delay(260).duration(500)} style={styles.actions}>
+        <Animated.View entering={FadeInUp.delay(280).duration(500)} style={styles.actions}>
           <Pressable
             onPress={() => go('boss')}
             style={({ pressed }) => [styles.cta, styles.bossCta, pressed && styles.pressed]}
           >
-            <Text style={styles.ctaEmoji}>🦁</Text>
+            <View style={[styles.emojiBubble, styles.bossBubble]}>
+              <Text style={styles.ctaEmoji}>🦁</Text>
+            </View>
             <View style={styles.ctaTextWrap}>
               <Text style={styles.ctaTitle}>상사 성향 알아보기</Text>
-              <Text style={styles.ctaDesc}>리더십·피드백 스타일을 동물 유형으로</Text>
+              <Text style={styles.ctaDesc}>리더십·피드백 스타일을 동물로</Text>
             </View>
+            <Text style={styles.arrow}>→</Text>
           </Pressable>
 
           <Pressable
             onPress={() => go('employee')}
             style={({ pressed }) => [styles.cta, styles.empCta, pressed && styles.pressed]}
           >
-            <Text style={styles.ctaEmoji}>🐝</Text>
+            <View style={[styles.emojiBubble, styles.empBubble]}>
+              <Text style={styles.ctaEmoji}>🐝</Text>
+            </View>
             <View style={styles.ctaTextWrap}>
               <Text style={styles.ctaTitle}>부하 직원 성향 알아보기</Text>
-              <Text style={styles.ctaDesc}>협업·보고 스타일을 동물 유형으로</Text>
+              <Text style={styles.ctaDesc}>협업·보고 스타일을 동물로</Text>
             </View>
+            <Text style={styles.arrow}>→</Text>
           </Pressable>
 
           <Pressable onPress={() => setPrivacyOpen(true)} hitSlop={8}>
@@ -87,13 +110,26 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     gap: spacing.sm,
-    paddingTop: spacing.xxl,
+    paddingTop: spacing.xl,
+  },
+  blobRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginBottom: spacing.sm,
+  },
+  blob: {
+    fontSize: 28,
+    backgroundColor: 'rgba(255,255,255,0.55)',
+    overflow: 'hidden',
+    borderRadius: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
   },
   brand: {
     fontFamily: 'NanumPenScript_400Regular',
-    fontSize: 54,
+    fontSize: 52,
     color: colors.accent,
-    lineHeight: 62,
+    lineHeight: 60,
   },
   title: {
     fontFamily: 'NotoSansKR_700Bold',
@@ -103,9 +139,33 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: 'NotoSansKR_500Medium',
-    fontSize: 16,
+    fontSize: 15,
     color: colors.inkMuted,
     marginTop: spacing.xs,
+    lineHeight: 22,
+  },
+  chipRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginTop: spacing.md,
+  },
+  chip: {
+    backgroundColor: colors.accentSoft,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: radii.pill,
+  },
+  chipAlt: {
+    backgroundColor: '#D7EEF8',
+  },
+  chipSun: {
+    backgroundColor: '#FFE8B8',
+  },
+  chipText: {
+    fontFamily: 'NotoSansKR_500Medium',
+    fontSize: 12,
+    color: colors.ink,
   },
   note: {
     fontFamily: 'NotoSansKR_400Regular',
@@ -131,30 +191,44 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.lg,
     paddingHorizontal: spacing.lg,
     borderWidth: 1.5,
+    shadowColor: colors.shadow,
+    shadowOpacity: 0.16,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 3,
   },
   bossCta: {
-    backgroundColor: '#FFF1E8',
-    borderColor: '#F0C2A8',
+    backgroundColor: '#FFF0E8',
+    borderColor: '#F5C4B0',
   },
   empCta: {
-    backgroundColor: '#E8F5F7',
-    borderColor: '#B7D7DE',
+    backgroundColor: '#E7F7FB',
+    borderColor: '#B5DCE6',
   },
-  ctaEmoji: {
-    fontSize: 36,
+  emojiBubble: {
+    width: 52,
+    height: 52,
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  ctaTextWrap: {
-    flex: 1,
-    gap: 4,
-  },
+  bossBubble: { backgroundColor: '#FFD8C8' },
+  empBubble: { backgroundColor: '#C8EAF2' },
+  ctaEmoji: { fontSize: 28 },
+  ctaTextWrap: { flex: 1, gap: 4 },
   ctaTitle: {
     fontFamily: 'NotoSansKR_700Bold',
-    fontSize: 18,
+    fontSize: 17,
     color: colors.ink,
   },
   ctaDesc: {
     fontFamily: 'NotoSansKR_400Regular',
     fontSize: 13,
+    color: colors.inkMuted,
+  },
+  arrow: {
+    fontFamily: 'NotoSansKR_700Bold',
+    fontSize: 18,
     color: colors.inkMuted,
   },
   privacyLink: {
@@ -166,7 +240,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.sm,
   },
   pressed: {
-    opacity: 0.9,
-    transform: [{ scale: 0.99 }],
+    opacity: 0.92,
+    transform: [{ scale: 0.985 }],
   },
 });

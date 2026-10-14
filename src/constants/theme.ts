@@ -1,20 +1,26 @@
 export const colors = {
-  bgTop: '#E8F2E4',
-  bgBottom: '#FFF8E7',
-  ink: '#1F2A24',
-  inkMuted: '#5C6B62',
-  accent: '#2F6B4F',
-  accentSoft: '#A8C5B0',
-  mustard: '#E2A93B',
-  clay: '#D9785C',
-  cream: '#FFFDF8',
-  line: '#D5E0D6',
-  boss: '#C45C26',
-  employee: '#2A7A8C',
-  progressTrack: '#DCE8DE',
-  progressFill: '#2F6B4F',
+  bgTop: '#DFF3F0',
+  bgMid: '#EAF6FF',
+  bgBottom: '#FFF6E8',
+  ink: '#1B2B33',
+  inkMuted: '#5B6F78',
+  accent: '#1F8A7A',
+  accentSoft: '#B7E4DC',
+  sunny: '#FFC857',
+  coral: '#FF8A6B',
+  sky: '#5BB8E8',
+  cream: '#FFFbf5',
+  line: '#C9E4DE',
+  boss: '#E8744F',
+  employee: '#2A9BB5',
+  progressTrack: '#D5EBE6',
+  progressFill: '#1F8A7A',
   white: '#FFFFFF',
-  shadow: 'rgba(31, 42, 36, 0.12)',
+  shadow: 'rgba(27, 43, 51, 0.14)',
+  choiceA: '#1F8A7A',
+  choiceB: '#5BB8E8',
+  choiceC: '#FF8A6B',
+  choiceD: '#9B7EDE',
 } as const;
 
 export const spacing = {
@@ -27,8 +33,16 @@ export const spacing = {
 } as const;
 
 export const radii = {
-  sm: 12,
-  md: 18,
+  sm: 14,
+  md: 20,
   lg: 28,
+  xl: 36,
   pill: 999,
 } as const;
+
+export const choiceBadgeColors = [
+  colors.choiceA,
+  colors.choiceB,
+  colors.choiceC,
+  colors.choiceD,
+] as const;

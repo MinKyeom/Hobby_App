@@ -17,16 +17,19 @@ export const ResultCard = forwardRef<View, Props>(function ResultCard(
   return (
     <View ref={ref} collapsable={false} style={styles.card}>
       <Text style={styles.brand}>직장 동물 농장</Text>
-      <Text style={styles.kicker}>소통 성향 유형 카드</Text>
+      <Text style={styles.kicker}>나의 소통 동물 카드</Text>
       <View style={styles.imageWrap}>
         <Image source={animal.localImage} style={styles.image} contentFit="cover" />
         <View style={styles.emojiBadge}>
           <Text style={styles.emoji}>{animal.emoji}</Text>
         </View>
+        <View style={styles.nameRibbon}>
+          <Text style={styles.nameRibbonText}>{animal.animalName}</Text>
+        </View>
       </View>
-      <Text style={styles.intro}>이 유형은</Text>
+      <Text style={styles.intro}>당신은</Text>
       <Text style={styles.title}>{animal.title}</Text>
-      <Text style={styles.introTail}>입니다. 이렇게 소통해 보세요!</Text>
+      <Text style={styles.introTail}>이렇게 소통해 보면 더 편해져요!</Text>
       <View style={styles.tags}>
         {animal.tags.map((tag) => (
           <View key={tag} style={styles.tag}>
@@ -34,11 +37,17 @@ export const ResultCard = forwardRef<View, Props>(function ResultCard(
           </View>
         ))}
       </View>
-      <Text style={styles.sectionLabel}>유형 특징</Text>
-      <Text style={styles.body}>{animal.traits}</Text>
-      <Text style={styles.sectionLabel}>맞춤 소통 팁</Text>
-      <Text style={styles.body}>{animal.tip}</Text>
-      <Text style={styles.credit}>Photo: {photographer} / Pexels</Text>
+      <View style={styles.sectionBox}>
+        <Text style={styles.sectionLabel}>유형 특징</Text>
+        <Text style={styles.body}>{animal.traits}</Text>
+      </View>
+      <View style={[styles.sectionBox, styles.tipBox]}>
+        <Text style={[styles.sectionLabel, styles.tipLabel]}>맞춤 소통 팁</Text>
+        <Text style={styles.body}>{animal.tip}</Text>
+      </View>
+      <Text style={styles.credit}>
+        Photo: {photographer} / {animal.creditSource}
+      </Text>
     </View>
   );
 });
@@ -46,15 +55,20 @@ export const ResultCard = forwardRef<View, Props>(function ResultCard(
 const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.cream,
-    borderRadius: radii.lg,
+    borderRadius: radii.xl,
     padding: spacing.lg,
     borderWidth: 1,
     borderColor: colors.line,
     gap: spacing.sm,
+    shadowColor: colors.shadow,
+    shadowOpacity: 0.2,
+    shadowRadius: 16,
+    shadowOffset: { width: 0, height: 8 },
+    elevation: 4,
   },
   brand: {
     fontFamily: 'NanumPenScript_400Regular',
-    fontSize: 28,
+    fontSize: 30,
     color: colors.accent,
     textAlign: 'center',
   },
@@ -66,8 +80,8 @@ const styles = StyleSheet.create({
     marginTop: -4,
   },
   imageWrap: {
-    height: 260,
-    borderRadius: radii.md,
+    height: 280,
+    borderRadius: radii.lg,
     overflow: 'hidden',
     backgroundColor: colors.accentSoft,
     marginVertical: spacing.sm,
@@ -80,15 +94,31 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 12,
     bottom: 12,
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: 52,
+    height: 52,
+    borderRadius: 26,
     backgroundColor: colors.cream,
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: colors.sunny,
   },
   emoji: {
     fontSize: 28,
+  },
+  nameRibbon: {
+    position: 'absolute',
+    left: 12,
+    top: 12,
+    backgroundColor: 'rgba(31, 138, 122, 0.92)',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: radii.pill,
+  },
+  nameRibbonText: {
+    fontFamily: 'NotoSansKR_700Bold',
+    fontSize: 13,
+    color: colors.white,
   },
   intro: {
     fontFamily: 'NotoSansKR_400Regular',
@@ -120,7 +150,7 @@ const styles = StyleSheet.create({
   tag: {
     backgroundColor: colors.bgTop,
     paddingHorizontal: 10,
-    paddingVertical: 4,
+    paddingVertical: 5,
     borderRadius: radii.pill,
   },
   tagText: {
@@ -128,11 +158,25 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.accent,
   },
+  sectionBox: {
+    backgroundColor: colors.white,
+    borderRadius: radii.md,
+    padding: spacing.md,
+    borderWidth: 1,
+    borderColor: colors.line,
+    gap: 6,
+  },
+  tipBox: {
+    backgroundColor: '#FFF7E6',
+    borderColor: '#F0D9A0',
+  },
   sectionLabel: {
     fontFamily: 'NotoSansKR_700Bold',
     fontSize: 13,
-    color: colors.mustard,
-    marginTop: spacing.xs,
+    color: colors.accent,
+  },
+  tipLabel: {
+    color: '#C47A12',
   },
   body: {
     fontFamily: 'NotoSansKR_400Regular',

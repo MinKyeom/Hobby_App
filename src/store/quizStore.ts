@@ -10,7 +10,7 @@ interface QuizState {
   answers: QuizAnswer[];
   result: AnimalCharacter | null;
   startQuiz: (role: Role) => void;
-  selectChoice: (choiceId: ChoiceId, nextId?: string) => void;
+  selectChoice: (choiceId: ChoiceId, nextId?: string, scores?: Record<string, number>) => void;
   goBack: () => boolean;
   getCurrentQuestion: () => Question | null;
   reset: () => void;
@@ -31,13 +31,13 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     });
   },
 
-  selectChoice: (choiceId, nextId) => {
+  selectChoice: (choiceId, nextId, scores = {}) => {
     const { role, currentQuestionId, answers } = get();
     if (!role || !currentQuestionId) return;
 
     const nextAnswers: QuizAnswer[] = [
       ...answers,
-      { questionId: currentQuestionId, choiceId },
+      { questionId: currentQuestionId, choiceId, scores },
     ];
 
     if (nextId) {
