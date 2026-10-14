@@ -1,7 +1,9 @@
 import { create } from 'zustand';
 
+import type { AbilityScore } from '@/constants/abilities';
 import { questionsByRole, startQuestionId } from '@/constants/questions';
 import type { AnimalCharacter, ChoiceId, Question, QuizAnswer, Role } from '@/types/quiz';
+import { computeAbilities } from '@/utils/abilities';
 import { resolveAnimal } from '@/utils/resolveResult';
 
 interface QuizState {
@@ -9,6 +11,7 @@ interface QuizState {
   currentQuestionId: string | null;
   answers: QuizAnswer[];
   result: AnimalCharacter | null;
+  abilities: AbilityScore[];
   startQuiz: (role: Role) => void;
   selectChoice: (choiceId: ChoiceId, nextId?: string, scores?: Record<string, number>) => void;
   goBack: () => boolean;
@@ -21,6 +24,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
   currentQuestionId: null,
   answers: [],
   result: null,
+  abilities: [],
 
   startQuiz: (role) => {
     set({
@@ -28,6 +32,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       currentQuestionId: startQuestionId[role],
       answers: [],
       result: null,
+      abilities: [],
     });
   },
 
@@ -46,10 +51,12 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     }
 
     const result = resolveAnimal(role, nextAnswers);
+    const abilities = computeAbilities(role, nextAnswers);
     set({
       answers: nextAnswers,
       currentQuestionId: null,
       result,
+      abilities,
     });
   },
 
@@ -62,6 +69,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       answers: answers.slice(0, -1),
       currentQuestionId: previous.questionId,
       result: null,
+      abilities: [],
     });
     return true;
   },
@@ -78,5 +86,6 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       currentQuestionId: null,
       answers: [],
       result: null,
+      abilities: [],
     }),
 }));

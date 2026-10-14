@@ -4,17 +4,25 @@ import type { RefObject } from 'react';
 import { Alert, Platform, Share, type View } from 'react-native';
 import { captureRef } from 'react-native-view-shot';
 
+import type { AbilityScore } from '@/constants/abilities';
+import { APP_NAME } from '@/constants/brand';
 import type { AnimalCharacter } from '@/types/quiz';
 
 export type ShareChannel = 'kakao' | 'twitter' | 'facebook' | 'instagram' | 'system';
 
-function buildShareText(animal: AnimalCharacter): string {
+function buildShareText(animal: AnimalCharacter, abilities: AbilityScore[] = []): string {
+  const top = [...abilities].sort((a, b) => b.value - a.value).slice(0, 3);
+  const abilityLine =
+    top.length > 0
+      ? top.map((a) => `${a.name} ${a.value}`).join(' · ')
+      : animal.tags.join(' ');
+
   return [
-    `[직장 동물 농장]`,
-    `나의 소통 성향은 ${animal.emoji} ${animal.title}!`,
-    animal.tags.join(' '),
+    `[${APP_NAME}]`,
+    `나의 유형은 ${animal.emoji} ${animal.title}!`,
+    `___력: ${abilityLine}`,
     '',
-    '유쾌한 직장 소통 심리 테스트 — 너는 어떤 동물 유형일까?',
+    '유쾌한 직장 소통 심리 테스트 — 너는 어떤 동물일까?',
     '※ 특정 인물을 비하하려는 목적이 아닌 소통 성향 테스트입니다.',
   ].join('\n');
 }
@@ -59,7 +67,7 @@ async function shareImageWeb(dataUri: string, message: string): Promise<void> {
     const nav = typeof navigator !== 'undefined' ? navigator : null;
 
     if (nav && typeof nav.share === 'function') {
-      const payload: ShareData = { files: [file], text: message, title: '직장 동물 농장' };
+      const payload: ShareData = { files: [file], text: message, title: APP_NAME };
       if (!nav.canShare || nav.canShare(payload)) {
         await nav.share(payload);
         return;
@@ -70,7 +78,7 @@ async function shareImageWeb(dataUri: string, message: string): Promise<void> {
   }
 
   downloadDataUri(dataUri, 'workplace-animal-farm-result.png');
-  await shareTextFallback(message, '직장 동물 농장');
+  await shareTextFallback(message, APP_NAME);
 }
 
 async function shareTextFallback(message: string, title: string): Promise<void> {
@@ -87,8 +95,9 @@ export async function shareViaChannel(
   channel: ShareChannel,
   viewRef: RefObject<View | null>,
   animal: AnimalCharacter,
+  abilities: AbilityScore[] = [],
 ): Promise<void> {
-  const message = buildShareText(animal);
+  const message = buildShareText(animal, abilities);
 
   try {
     if (channel === 'twitter' && Platform.OS === 'web') {
@@ -99,7 +108,7 @@ export async function shareViaChannel(
 
     const uri = await captureCard(viewRef);
     if (!uri) {
-      await shareTextFallback(message, '직장 동물 농장');
+      await shareTextFallback(message, APP_NAME);
       return;
     }
 
@@ -119,7 +128,7 @@ export async function shareViaChannel(
     await shareImageNative(uri, titles[channel]);
   } catch {
     try {
-      await shareTextFallback(message, '직장 동물 농장');
+      await shareTextFallback(message, APP_NAME);
     } catch {
       Alert.alert('공유 실패', '공유 중 문제가 발생했어요. 잠시 후 다시 시도해 주세요.');
     }

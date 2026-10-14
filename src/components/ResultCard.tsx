@@ -2,32 +2,44 @@ import { Image } from 'expo-image';
 import { forwardRef } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { AbilityBars } from '@/components/AbilityBars';
+import type { AbilityScore } from '@/constants/abilities';
+import { APP_NAME_SHORT } from '@/constants/brand';
 import { colors, radii, spacing } from '@/constants/theme';
-import type { AnimalCharacter } from '@/types/quiz';
+import type { AnimalCharacter, Role } from '@/types/quiz';
 
 interface Props {
   animal: AnimalCharacter;
   photographer: string;
+  abilities: AbilityScore[];
+  role: Role;
 }
 
 export const ResultCard = forwardRef<View, Props>(function ResultCard(
-  { animal, photographer },
+  { animal, photographer, abilities, role },
   ref,
 ) {
+  const roleLabel = role === 'boss' ? '상사편' : '부하편';
+
   return (
     <View ref={ref} collapsable={false} style={styles.card}>
-      <Text style={styles.brand}>직장 동물 농장</Text>
-      <Text style={styles.kicker}>나의 소통 동물 카드</Text>
+      <Text style={styles.brand}>{APP_NAME_SHORT}</Text>
+      <Text style={styles.kicker}>{roleLabel} · 소통 동물 카드</Text>
       <View style={styles.imageWrap}>
         <Image source={animal.localImage} style={styles.image} contentFit="cover" />
         <View style={styles.emojiBadge}>
           <Text style={styles.emoji}>{animal.emoji}</Text>
         </View>
         <View style={styles.nameRibbon}>
-          <Text style={styles.nameRibbonText}>{animal.animalName}</Text>
+          <Text style={styles.nameRibbonText}>
+            {animal.emoji} {animal.animalName}
+          </Text>
         </View>
       </View>
       <Text style={styles.intro}>당신은</Text>
+      <Text style={styles.animalNameBig}>
+        {animal.emoji} {animal.animalName}
+      </Text>
       <Text style={styles.title}>{animal.title}</Text>
       <Text style={styles.introTail}>이렇게 소통해 보면 더 편해져요!</Text>
       <View style={styles.tags}>
@@ -45,6 +57,11 @@ export const ResultCard = forwardRef<View, Props>(function ResultCard(
         <Text style={[styles.sectionLabel, styles.tipLabel]}>맞춤 소통 팁</Text>
         <Text style={styles.body}>{animal.tip}</Text>
       </View>
+      {abilities.length > 0 ? (
+        <View style={styles.abilityBlock}>
+          <AbilityBars abilities={abilities} roleLabel={roleLabel} />
+        </View>
+      ) : null}
       <Text style={styles.credit}>
         Photo: {photographer} / {animal.creditSource}
       </Text>
@@ -126,12 +143,19 @@ const styles = StyleSheet.create({
     color: colors.inkMuted,
     textAlign: 'center',
   },
+  animalNameBig: {
+    fontFamily: 'NotoSansKR_700Bold',
+    fontSize: 26,
+    color: colors.accent,
+    textAlign: 'center',
+    lineHeight: 34,
+  },
   title: {
     fontFamily: 'NotoSansKR_700Bold',
-    fontSize: 22,
+    fontSize: 18,
     color: colors.ink,
     textAlign: 'center',
-    lineHeight: 32,
+    lineHeight: 28,
   },
   introTail: {
     fontFamily: 'NotoSansKR_500Medium',
@@ -177,6 +201,9 @@ const styles = StyleSheet.create({
   },
   tipLabel: {
     color: '#C47A12',
+  },
+  abilityBlock: {
+    marginTop: spacing.sm,
   },
   body: {
     fontFamily: 'NotoSansKR_400Regular',

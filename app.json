@@ -1,13 +1,14 @@
 {
   "expo": {
-    "name": "직장 동물 농장",
-    "slug": "workplace-animal-farm",
+    "name": "직장 동물 진단",
+    "slug": "workplace-animal-diagnosis",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "scheme": "workplaceanimalfarm",
+    "scheme": "workplaceanimaldiagnosis",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "description": "부하편·상사편 소통 성향을 동물 유형과 ___력 리포트로 진단하는 심리 테스트 앱. 회원가입 없이 바로 이용.",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -15,9 +16,10 @@
     },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.minkyeom.workplaceanimalfarm",
+      "bundleIdentifier": "com.minkyeom.workplaceanimaldiagnosis",
       "buildNumber": "1",
       "infoPlist": {
+        "CFBundleDisplayName": "직장 동물 진단",
         "NSPhotoLibraryAddUsageDescription": "결과 카드를 사진첩에 저장하기 위해 권한이 필요합니다.",
         "NSPhotoLibraryUsageDescription": "결과 카드를 사진첩에 저장하기 위해 권한이 필요합니다.",
         "ITSAppUsesNonExemptEncryption": false,
@@ -30,7 +32,7 @@
       }
     },
     "android": {
-      "package": "com.minkyeom.workplaceanimalfarm",
+      "package": "com.minkyeom.workplaceanimaldiagnosis",
       "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#DFF3F0",
@@ -38,7 +40,8 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.minkyeom.workplaceanimaldiagnosis"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -57,7 +60,14 @@
           "isAccessMediaLocationEnabled": false
         }
       ],
-      "expo-splash-screen"
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#DFF3F0",
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 200
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

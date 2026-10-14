@@ -37,7 +37,7 @@ export interface AnimalCharacter {
   localImage: number;
   photographer: string;
   photographerUrl: string;
-  creditSource: 'Pexels' | 'Pixabay';
+  creditSource: 'Pexels' | 'Pixabay' | 'Wikimedia';
 }
 
 export interface QuizAnswer {

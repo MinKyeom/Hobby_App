@@ -6,6 +6,7 @@ import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { PrivacyModal } from '@/components/PrivacyModal';
+import { APP_NAME, APP_SUBTITLE, APP_TAGLINE } from '@/constants/brand';
 import { APP_PURPOSE } from '@/constants/compliance';
 import { colors, radii, spacing } from '@/constants/theme';
 import { useQuizStore } from '@/store/quizStore';
@@ -31,23 +32,23 @@ export default function HomeScreen() {
             <Text style={styles.blob}>🦊</Text>
           </Animated.View>
           <Animated.Text entering={FadeInDown.delay(60).duration(500)} style={styles.brand}>
-            직장 동물 농장
+            {APP_NAME}
           </Animated.Text>
           <Animated.Text entering={FadeInDown.delay(120).duration(500)} style={styles.title}>
-            나는 어떤 동물일까?
+            {APP_TAGLINE}
           </Animated.Text>
           <Animated.Text entering={FadeInDown.delay(180).duration(500)} style={styles.subtitle}>
-            선택마다 질문이 달라지는 5문항 소통 성향 테스트
+            {APP_SUBTITLE}
           </Animated.Text>
           <Animated.View entering={FadeInDown.delay(220).duration(500)} style={styles.chipRow}>
             <View style={styles.chip}>
-              <Text style={styles.chipText}>24종 동물</Text>
+              <Text style={styles.chipText}>부하편 · 상사편</Text>
             </View>
             <View style={[styles.chip, styles.chipAlt]}>
-              <Text style={styles.chipText}>분기형 퀴즈</Text>
+              <Text style={styles.chipText}>5문항 분기</Text>
             </View>
             <View style={[styles.chip, styles.chipSun]}>
-              <Text style={styles.chipText}>웃긴 동물 카드</Text>
+              <Text style={styles.chipText}>___력 리포트</Text>
             </View>
           </Animated.View>
           <Animated.Text entering={FadeInDown.delay(260).duration(500)} style={styles.note}>
@@ -61,28 +62,32 @@ export default function HomeScreen() {
         <Animated.View entering={FadeInUp.delay(280).duration(500)} style={styles.actions}>
           <Pressable
             onPress={() => go('boss')}
+            accessibilityRole="button"
+            accessibilityLabel="상사편 진단 시작"
             style={({ pressed }) => [styles.cta, styles.bossCta, pressed && styles.pressed]}
           >
             <View style={[styles.emojiBubble, styles.bossBubble]}>
               <Text style={styles.ctaEmoji}>🦁</Text>
             </View>
             <View style={styles.ctaTextWrap}>
-              <Text style={styles.ctaTitle}>상사 성향 알아보기</Text>
-              <Text style={styles.ctaDesc}>리더십·피드백 스타일을 동물로</Text>
+              <Text style={styles.ctaTitle}>상사편 진단</Text>
+              <Text style={styles.ctaDesc}>배분력 · 멘탈케어력 · 몰입조율력</Text>
             </View>
             <Text style={styles.arrow}>→</Text>
           </Pressable>
 
           <Pressable
             onPress={() => go('employee')}
+            accessibilityRole="button"
+            accessibilityLabel="부하편 진단 시작"
             style={({ pressed }) => [styles.cta, styles.empCta, pressed && styles.pressed]}
           >
             <View style={[styles.emojiBubble, styles.empBubble]}>
               <Text style={styles.ctaEmoji}>🐝</Text>
             </View>
             <View style={styles.ctaTextWrap}>
-              <Text style={styles.ctaTitle}>부하 직원 성향 알아보기</Text>
-              <Text style={styles.ctaDesc}>협업·보고 스타일을 동물로</Text>
+              <Text style={styles.ctaTitle}>부하편 진단</Text>
+              <Text style={styles.ctaDesc}>응답력 · 수습력 · 퇴근감각력</Text>
             </View>
             <Text style={styles.arrow}>→</Text>
           </Pressable>
@@ -127,19 +132,19 @@ const styles = StyleSheet.create({
   },
   brand: {
     fontFamily: 'NanumPenScript_400Regular',
-    fontSize: 52,
+    fontSize: 36,
     color: colors.accent,
-    lineHeight: 60,
+    lineHeight: 44,
   },
   title: {
     fontFamily: 'NotoSansKR_700Bold',
-    fontSize: 28,
+    fontSize: 26,
     color: colors.ink,
-    lineHeight: 38,
+    lineHeight: 36,
   },
   subtitle: {
     fontFamily: 'NotoSansKR_500Medium',
-    fontSize: 15,
+    fontSize: 14,
     color: colors.inkMuted,
     marginTop: spacing.xs,
     lineHeight: 22,
@@ -223,7 +228,7 @@ const styles = StyleSheet.create({
   },
   ctaDesc: {
     fontFamily: 'NotoSansKR_400Regular',
-    fontSize: 13,
+    fontSize: 12,
     color: colors.inkMuted,
   },
   arrow: {

@@ -1,8 +1,9 @@
-# 직장 동물 농장: 나는 어떤 동물일까?
+# 직장 동물 진단: 부하편 & 상사편
 
-상사·부하 직원 **소통 성향**을 5문항 분기형 퀴즈로 살펴보고, 16종 동물 유형 카드를 SNS로 공유하는 React Native (Expo) 앱입니다.
+5문항 분기형 퀴즈로 **소통 성향 동물 유형**과 **___력 리포트**를 보여주는 Expo(React Native) 앱입니다.  
+목표는 **Google Play 스토어** 출시입니다.
 
-## 바로 실행
+## 바로 실행 (로컬 테스트)
 
 ```bash
 cd Hobby_App
@@ -10,49 +11,34 @@ npm install --legacy-peer-deps
 npx expo start -c
 ```
 
-- `i` iOS · `a` Android · `w` 웹 · Expo Go QR 스캔
+- `a` Android · `i` iOS · `w` 웹 · Expo Go QR
 
-## 출시 준비도 (현재)
+## ___력 (순화 명칭)
 
-| 구분 | 상태 | 설명 |
-|------|------|------|
-| 코어 UX (홈→퀴즈→결과→공유) | ✅ | 데모·내부 테스트 가능 |
-| 컴플라이언스 톤/면책/프라이버시 모달 | ✅ | 인앱 반영 |
-| 로컬 동물 이미지·게스트 전용 | ✅ | 네트워크 의존 최소화 |
-| EAS projectId / 계정 연동 | ⬜ | `eas init` 필요 |
-| 호스팅된 개인정보 URL 실배포 | ⬜ | `public/privacy.html` 준비됨, GitHub Pages 등 연결 |
-| 실제 문의 이메일 | ⬜ | `src/constants/compliance.ts`의 `SUPPORT_EMAIL` 교체 |
-| 브랜드 아이콘·스토어 스크린샷 | ⬜ | 템플릿 아이콘일 수 있음 — 교체 권장 |
-| 스토어 리스팅/심사 제출 | ⬜ | 위 항목 완료 후 |
+| 문항 | 부하편 | 상사편 |
+|------|--------|--------|
+| Q1 | 응답력 | 배분력 |
+| Q2 | 멘탈수호력 | 멘탈케어력 |
+| Q3 | 수습력 | 과제전달력 |
+| Q4 | 상향조율력 | 팀원독려력 |
+| Q5 | 퇴근감각력 | 몰입조율력 |
 
-**판정:** 기능·UX는 **소프트런치/클로즈드 테스트**에 가깝고, **스토어 정식 제출**은 계정·정책 URL·에셋·메타데이터 작업이 더 필요합니다.
+각 선택지가 해당 문항의 ___력 수치에 반영되며, 결과 카드에 함께 표시·공유됩니다.
 
-자세한 체크: [STORE_COMPLIANCE.md](./STORE_COMPLIANCE.md) · [RELEASE_CHECKLIST.md](./RELEASE_CHECKLIST.md)
+## Play 출시 흐름
 
-## 주요 기능
+1. `PLAY_STORE_LISTING.md` 문구 확인
+2. `SUPPORT_EMAIL` / `privacy.html` HTTPS 공개
+3. `eas init` → Android `preview`/`production` 빌드
+4. Play Console 내부 테스트 → 프로덕션
 
-- 회원가입 없음 (게스트 전용)
-- 5단계 분기 퀴즈 (문항당 3~4지선다, 선택에 따라 다른 후속 질문) + 이전 문항
-- 24종 동물 결과 카드 (로컬 Pexels 상업 이용 가능 이미지)
-- PNG 저장 · OS 공유 시트 (카카오톡/X/Facebook/Instagram 선택)
-- 개인정보 처리방침 모달 + `public/privacy.html`
+상세: [RELEASE_CHECKLIST.md](./RELEASE_CHECKLIST.md) · [PLAY_STORE_LISTING.md](./PLAY_STORE_LISTING.md)
 
-## 스토어 빌드 (준비 후)
-
-```bash
-npx eas-cli@latest login
-npx eas-cli@latest init
-npx eas-cli@latest build --platform all --profile production
-```
-
-## 프로젝트 구조
+## 구조
 
 ```
-src/app/           # Home / Quiz / Result
-src/components/    # 카드, 공유, 프라이버시, ErrorBoundary
-src/constants/     # 질문·동물·컴플라이언스·테마
-src/store/         # Zustand
-src/utils/         # 결과 매핑·공유·저장
-public/privacy.html
-assets/animals/    # 로컬 동물 이미지 16장
+src/app/            # Home / Quiz / Result
+src/constants/      # brand, abilities, questions, animals
+src/components/     # ResultCard, AbilityBars, Share…
+src/utils/          # abilities 점수, 결과 매칭, 공유
 ```

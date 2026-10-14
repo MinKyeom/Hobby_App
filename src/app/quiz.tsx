@@ -86,9 +86,9 @@ export default function QuizScreen() {
             style={styles.body}
           >
             <View style={styles.rolePill}>
-              <Text style={styles.roleTag}>
-                {role === 'boss' ? '🦁 상사 소통 성향' : '🐝 부하 직원 소통 성향'}
-              </Text>
+          <Text style={styles.roleTag}>
+            {role === 'boss' ? '🦁 상사편 · Q별 ___력 반영' : '🐝 부하편 · Q별 ___력 반영'}
+          </Text>
             </View>
             <Text style={styles.prompt} accessibilityRole="header">
               {question.prompt}
