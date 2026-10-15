@@ -7,12 +7,12 @@ import Animated, { FadeIn, FadeInUp } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EmptyRedirect } from '@/components/EmptyRedirect';
+import { LicensesModal } from '@/components/LicensesModal';
 import { ResultCard } from '@/components/ResultCard';
 import { ShareActions } from '@/components/ShareActions';
 import { RESULT_DISCLAIMER } from '@/constants/compliance';
 import { colors, radii, spacing } from '@/constants/theme';
 import { useQuizStore } from '@/store/quizStore';
-import { getAnimalImage } from '@/utils/pexels';
 import { saveResultImage, shareViaChannel, type ShareChannel } from '@/utils/share';
 
 export default function ResultScreen() {
@@ -23,12 +23,11 @@ export default function ResultScreen() {
   const cardRef = useRef<View>(null);
   const scrollRef = useRef<ScrollView>(null);
   const [busy, setBusy] = useState(false);
+  const [licensesOpen, setLicensesOpen] = useState(false);
 
   if (!result || !role) {
     return <EmptyRedirect message="결과가 없어요. 홈으로 이동해요" />;
   }
-
-  const imageMeta = getAnimalImage(result);
 
   const onShare = async (channel: ShareChannel) => {
     setBusy(true);
@@ -70,11 +69,10 @@ export default function ResultScreen() {
             <Text style={styles.headline} accessibilityRole="header">
               {result.emoji} {result.animalName}
             </Text>
-            <Text style={styles.subhead}>아래에서 저장하거나 SNS로 공유해 보세요</Text>
+            <Text style={styles.subhead}>결과 카드</Text>
             <ResultCard
               ref={cardRef}
               animal={result}
-              photographer={imageMeta.photographer}
               abilities={abilities}
               role={role}
             />
@@ -84,10 +82,22 @@ export default function ResultScreen() {
             <ShareActions busy={busy} onShare={onShare} onSave={onSave} hideSave />
           </Animated.View>
 
-          <Text style={styles.disclaimer} accessibilityRole="text">
-            {RESULT_DISCLAIMER}
-          </Text>
+          <View style={styles.legalBlock}>
+            <Text style={styles.disclaimer} accessibilityRole="text">
+              {RESULT_DISCLAIMER}
+            </Text>
+            <Pressable
+              onPress={() => setLicensesOpen(true)}
+              hitSlop={8}
+              accessibilityRole="link"
+              accessibilityLabel="오픈소스 및 이미지 출처 보기"
+            >
+              <Text style={styles.legalLink}>오픈소스·출처</Text>
+            </Pressable>
+          </View>
         </ScrollView>
+
+        <LicensesModal visible={licensesOpen} onClose={() => setLicensesOpen(false)} />
 
         {/* 하단 고정: 저장 / 공유로 이동 / 다시하기 */}
         <SafeAreaView edges={['bottom']} style={styles.stickyWrap}>
@@ -166,13 +176,26 @@ const styles = StyleSheet.create({
   shareBlock: {
     marginTop: spacing.sm,
   },
+  legalBlock: {
+    gap: 6,
+    alignItems: 'center',
+    paddingHorizontal: spacing.sm,
+    marginTop: spacing.sm,
+    opacity: 0.9,
+  },
   disclaimer: {
     fontFamily: 'NotoSansKR_400Regular',
-    fontSize: 12,
-    lineHeight: 18,
+    fontSize: 11,
+    lineHeight: 16,
     color: colors.inkMuted,
     textAlign: 'center',
-    paddingHorizontal: spacing.sm,
+  },
+  legalLink: {
+    fontFamily: 'NotoSansKR_500Medium',
+    fontSize: 11,
+    color: colors.inkMuted,
+    textDecorationLine: 'underline',
+    paddingVertical: 4,
   },
   stickyWrap: {
     backgroundColor: 'rgba(255,251,245,0.96)',

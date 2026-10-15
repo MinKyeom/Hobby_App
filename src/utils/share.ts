@@ -31,7 +31,7 @@ function buildShareText(animal: AnimalCharacter, abilities: AbilityScore[] = [])
     `___력: ${abilityLine}`,
     '',
     '오피스 동물 진단 — 나는 어떤 동물일까?',
-    '※ 특정 사람을 비하하려는 목적이 아닌 소통 성향 진단입니다.',
+    '※ 재미용 진단 · 의료·상담 아님',
   ].join('\n');
 }
 

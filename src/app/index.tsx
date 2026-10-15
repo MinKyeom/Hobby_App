@@ -5,6 +5,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeInDown, FadeInUp } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { LicensesModal } from '@/components/LicensesModal';
 import { PrivacyModal } from '@/components/PrivacyModal';
 import {
   APP_EDITIONS,
@@ -12,6 +13,7 @@ import {
   APP_SUBTITLE,
   APP_TAGLINE,
 } from '@/constants/brand';
+import { FOOTER_NOTICE } from '@/constants/compliance';
 import { colors, radii, spacing } from '@/constants/theme';
 import { useQuizStore } from '@/store/quizStore';
 import type { Role } from '@/types/quiz';
@@ -19,6 +21,7 @@ import type { Role } from '@/types/quiz';
 export default function HomeScreen() {
   const startQuiz = useQuizStore((s) => s.startQuiz);
   const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [licensesOpen, setLicensesOpen] = useState(false);
 
   const go = (role: Role) => {
     startQuiz(role);
@@ -109,18 +112,33 @@ export default function HomeScreen() {
               <Text style={styles.arrow}>→</Text>
             </Pressable>
 
-            <Pressable
-              onPress={() => setPrivacyOpen(true)}
-              hitSlop={10}
-              accessibilityRole="link"
-              accessibilityLabel="개인정보 처리방침 보기"
-            >
-              <Text style={styles.privacyLink}>개인정보 처리방침</Text>
-            </Pressable>
+            <View style={styles.footer}>
+              <View style={styles.footerLinks}>
+                <Pressable
+                  onPress={() => setPrivacyOpen(true)}
+                  hitSlop={10}
+                  accessibilityRole="link"
+                  accessibilityLabel="개인정보 처리방침 보기"
+                >
+                  <Text style={styles.footerLink}>개인정보 처리방침</Text>
+                </Pressable>
+                <Text style={styles.footerDot}>·</Text>
+                <Pressable
+                  onPress={() => setLicensesOpen(true)}
+                  hitSlop={10}
+                  accessibilityRole="link"
+                  accessibilityLabel="오픈소스 및 이미지 출처 보기"
+                >
+                  <Text style={styles.footerLink}>오픈소스·출처</Text>
+                </Pressable>
+              </View>
+              <Text style={styles.footerNotice}>{FOOTER_NOTICE}</Text>
+            </View>
           </Animated.View>
         </ScrollView>
 
         <PrivacyModal visible={privacyOpen} onClose={() => setPrivacyOpen(false)} />
+        <LicensesModal visible={licensesOpen} onClose={() => setLicensesOpen(false)} />
       </SafeAreaView>
     </LinearGradient>
   );
@@ -271,14 +289,39 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: colors.inkMuted,
   },
-  privacyLink: {
+  footer: {
+    marginTop: spacing.sm,
+    gap: 8,
+    alignItems: 'center',
+    paddingTop: spacing.sm,
+  },
+  footerLinks: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    gap: 6,
+  },
+  footerLink: {
     fontFamily: 'NotoSansKR_500Medium',
-    fontSize: 13,
+    fontSize: 12,
+    color: colors.inkMuted,
+    textDecorationLine: 'underline',
+  },
+  footerDot: {
+    fontFamily: 'NotoSansKR_400Regular',
+    fontSize: 12,
+    color: colors.inkMuted,
+  },
+  footerNotice: {
+    fontFamily: 'NotoSansKR_400Regular',
+    fontSize: 11,
+    lineHeight: 16,
     color: colors.inkMuted,
     textAlign: 'center',
-    textDecorationLine: 'underline',
-    marginTop: spacing.xs,
-    paddingVertical: spacing.sm,
+    opacity: 0.85,
+    paddingHorizontal: spacing.md,
+    paddingBottom: spacing.xs,
   },
   pressed: {
     opacity: 0.92,

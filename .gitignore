@@ -1,49 +1,79 @@
+# =============================================================================
+# Hobby_App /.gitignore
+# -----------------------------------------------------------------------------
+# [커밋 OK]  소스(src/), 공개 에셋(assets/), public/*.html, app.json, eas.json,
+#            package.json / package-lock.json, .env.example, LICENSE, 문서(*.md),
+#            babel/tsconfig, scripts/*.mjs (비밀 없는 유틸)
+#
+# [커밋 금지] 비밀키·인증서·서비스계정, .env 실값, node_modules, .expo 캐시,
+#              로컬 생성 ios/android, 스토어 빌드 산출물(ipa/apk/aab), 로그/캐시
+# =============================================================================
+
 # =========================
-# Dependencies
+# Dependencies (재설치 가능 → 금지)
 # =========================
 node_modules/
 .pnp
 .pnp.js
+.pnp.cjs
 .yarn/install-state.gz
+.yarn/cache/
+.pnpm-store/
 
 # =========================
-# Environment & secrets (절대 커밋 금지)
+# 환경변수 · 비밀 (절대 커밋 금지)
+# 예외: .env.example 만 커밋 (키 자리표시자)
 # =========================
 .env
 .env.*
 !.env.example
+
+# 인증서 / 키스토어 / 프로비저닝
 *.pem
 *.p8
 *.p12
+*.pfx
+*.cer
+*.cert
 *.key
 *.mobileprovision
 *.jks
 *.keystore
 *.jks.b64
+*.keystore.b64
+AuthKey_*.p8
+
+# 클라우드·스토어 자격증명
 secrets/
 **/secrets/
+credentials/
+**/credentials/
 credentials.json
 **/credentials.json
 service-account*.json
 *-service-account.json
+*serviceAccount*.json
 google-services.json
 GoogleService-Info.plist
-AuthKey_*.p8
+google-play*.json
+play-store*.json
+asc_api_key.json
+api-key*.json
+*-credentials.json
 eas-credentials/
 .expo-shared/credentials.json
 
-# API keys / local overrides
-.env.local
-.env.development
-.env.development.local
-.env.production
-.env.production.local
-.env.test
-.env.test.local
-.expo.env*
+# SSH / 로컬 시크릿
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+*.secret
+*.secrets
+.secrets
 
 # =========================
-# Expo / Metro / bundler
+# Expo / Metro / 번들러 (로컬 캐시 → 금지)
 # =========================
 .expo/
 dist/
@@ -51,42 +81,52 @@ web-build/
 expo-env.d.ts
 .metro-health-check*
 *.orig.*
+.expo-shared/
+!.expo-shared/.gitkeep
 
 # =========================
-# Native (CNG — 로컬 생성물, 커밋하지 않음)
+# Native (CNG: eas/prebuild 로컬 생성 → 금지)
+# 수동 eject 정책으로 ios/android를 커밋할 때만 아래 두 줄을 제거하세요.
 # =========================
 /ios
 /android
 .kotlin/
 
 # =========================
-# EAS / store submission artifacts
+# EAS / 스토어 빌드 산출물 (바이너리 → 금지)
+# eas.json 자체는 커밋 OK (비밀 없는 빌드 프로필)
 # =========================
 *.ipa
 *.apk
 *.aab
+*.dSYM.zip
 *.app.dSYM.zip
 build-*.tar.gz
 
 # =========================
-# Debug / logs / coverage
+# 디버그 / 로그 / 커버리지
 # =========================
 npm-debug.*
 yarn-debug.*
 yarn-error.*
 pnpm-debug.*
+bun-debug.*
 *.log
 logs/
 coverage/
 .nyc_output/
+report.*.json
+scripts/*-report.json
 
 # =========================
-# TypeScript / tooling caches
+# TypeScript / 툴 캐시
 # =========================
 *.tsbuildinfo
 .turbo/
 .cache/
 .eslintcache
+.parcel-cache/
+.vite/
 
 # =========================
 # OS / IDE
@@ -96,6 +136,8 @@ coverage/
 .LSOverride
 Thumbs.db
 Desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
 .idea/
 .vscode/*
 !.vscode/extensions.json
@@ -103,17 +145,21 @@ Desktop.ini
 *.swp
 *.swo
 *~
+~$*
 
 # =========================
-# Misc local junk
+# 로컬 잡파일 / 배포 도구 캐시
 # =========================
 tmp/
 temp/
 *.tmp
 *.bak
 *.old
+*.orig
 .vercel
 .firebase/
 firebase-debug.log
 .cursor/
 agent-transcripts/
+.eas-cli/
+.eastemp/

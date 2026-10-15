@@ -10,7 +10,6 @@ import type { AnimalCharacter, Role } from '@/types/quiz';
 
 interface Props {
   animal: AnimalCharacter;
-  photographer: string;
   abilities: AbilityScore[];
   role: Role;
 }
@@ -23,7 +22,7 @@ const TIER_LABEL: Record<AnimalCharacter['tier'], string> = {
 };
 
 export const ResultCard = forwardRef<View, Props>(function ResultCard(
-  { animal, photographer, abilities, role },
+  { animal, abilities, role },
   ref,
 ) {
   const roleLabel = role === 'boss' ? '상사편' : '부하편';
@@ -87,9 +86,6 @@ export const ResultCard = forwardRef<View, Props>(function ResultCard(
           <AbilityBars abilities={abilities} roleLabel={roleLabel} />
         </View>
       ) : null}
-      <Text style={styles.credit}>
-        Illustration: {photographer} ({animal.creditSource}) · MIT
-      </Text>
     </View>
   );
 });
@@ -260,12 +256,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 22,
     color: colors.inkMuted,
-  },
-  credit: {
-    marginTop: spacing.sm,
-    fontFamily: 'NotoSansKR_400Regular',
-    fontSize: 11,
-    color: colors.inkMuted,
-    textAlign: 'center',
   },
 });

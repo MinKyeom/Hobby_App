@@ -8,7 +8,8 @@
     "scheme": "workplaceanimaldiagnosis",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "description": "부하편·상사편 소통 성향을 동물 유형과 ___력 리포트로 알아보는 가벼운 심리 진단 앱. 가입 없이 바로 이용.",
+    "description": "성인·직장인 대상. 부하편·상사편 소통 성향을 동물 유형과 ___력으로 알아보는 엔터테인먼트 진단. 가입 없이 이용.",
+    "primaryColor": "#2F6B4F",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -20,8 +21,8 @@
       "buildNumber": "1",
       "infoPlist": {
         "CFBundleDisplayName": "오피스 동물 진단",
-        "NSPhotoLibraryAddUsageDescription": "결과 카드를 사진첩에 저장하기 위해 권한이 필요합니다.",
-        "NSPhotoLibraryUsageDescription": "결과 카드를 사진첩에 저장하기 위해 권한이 필요합니다.",
+        "NSPhotoLibraryAddUsageDescription": "진단 결과 카드 이미지를 사진 앱에 저장하기 위해서만 사용합니다. 기존 사진을 읽거나 업로드하지 않습니다.",
+        "NSPhotoLibraryUsageDescription": "진단 결과 카드 이미지를 사진 앱에 저장하기 위해서만 사용합니다. 기존 사진을 읽거나 업로드하지 않습니다.",
         "ITSAppUsesNonExemptEncryption": false,
         "LSApplicationQueriesSchemes": [
           "kakaotalk",
@@ -29,6 +30,12 @@
           "fb",
           "instagram"
         ]
+      },
+      "privacyManifests": {
+        "NSPrivacyAccessedAPITypes": [],
+        "NSPrivacyTracking": false,
+        "NSPrivacyTrackingDomains": [],
+        "NSPrivacyCollectedDataTypes": []
       }
     },
     "android": {
@@ -41,7 +48,20 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.minkyeom.workplaceanimaldiagnosis"
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.minkyeom.workplaceanimaldiagnosis",
+      "blockedPermissions": [
+        "android.permission.ACCESS_MEDIA_LOCATION",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.READ_MEDIA_AUDIO",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.READ_CONTACTS",
+        "android.permission.WRITE_CONTACTS",
+        "android.permission.READ_PHONE_STATE",
+        "com.google.android.gms.permission.AD_ID"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -55,8 +75,8 @@
       [
         "expo-media-library",
         {
-          "photosPermission": "결과 카드를 사진첩에 저장하기 위해 권한이 필요합니다.",
-          "savePhotosPermission": "결과 카드를 사진첩에 저장하기 위해 권한이 필요합니다.",
+          "photosPermission": "진단 결과 카드 이미지를 사진 앱에 저장하기 위해서만 사용합니다. 기존 사진을 읽거나 업로드하지 않습니다.",
+          "savePhotosPermission": "진단 결과 카드 이미지를 사진 앱에 저장하기 위해서만 사용합니다. 기존 사진을 읽거나 업로드하지 않습니다.",
           "isAccessMediaLocationEnabled": false
         }
       ],
@@ -71,6 +91,18 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "supportsRTL": false,
+      "storeCompliance": {
+        "privacyPolicyUrl": "https://minkyeom.github.io/Hobby_App/privacy.html",
+        "supportUrl": "https://minkyeom.github.io/Hobby_App/support.html",
+        "licensesUrl": "https://minkyeom.github.io/Hobby_App/licenses.html",
+        "targetAgeMin": 18,
+        "targetAudience": "adults-workplace",
+        "containsAds": false,
+        "dataCollection": "none-server"
+      }
     }
   }
 }

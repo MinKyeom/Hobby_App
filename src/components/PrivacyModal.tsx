@@ -2,7 +2,12 @@ import * as Linking from 'expo-linking';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { PRIVACY_POLICY, PRIVACY_POLICY_URL, SUPPORT_EMAIL } from '@/constants/compliance';
+import {
+  PRIVACY_POLICY,
+  PRIVACY_POLICY_URL,
+  SUPPORT_EMAIL,
+  SUPPORT_URL,
+} from '@/constants/compliance';
 import { colors, radii, spacing } from '@/constants/theme';
 
 interface Props {
@@ -14,11 +19,26 @@ export function PrivacyModal({ visible, onClose }: Props) {
   const insets = useSafeAreaInsets();
 
   return (
-    <Modal visible={visible} animationType="slide" presentationStyle="pageSheet" onRequestClose={onClose}>
-      <View style={[styles.container, { paddingTop: insets.top + spacing.md, paddingBottom: insets.bottom + spacing.md }]}>
+    <Modal
+      visible={visible}
+      animationType="slide"
+      presentationStyle="pageSheet"
+      onRequestClose={onClose}
+    >
+      <View
+        style={[
+          styles.container,
+          { paddingTop: insets.top + spacing.md, paddingBottom: insets.bottom + spacing.md },
+        ]}
+      >
         <View style={styles.header}>
           <Text style={styles.title}>{PRIVACY_POLICY.title}</Text>
-          <Pressable onPress={onClose} hitSlop={12} accessibilityRole="button" accessibilityLabel="닫기">
+          <Pressable
+            onPress={onClose}
+            hitSlop={12}
+            accessibilityRole="button"
+            accessibilityLabel="닫기"
+          >
             <Text style={styles.close}>닫기</Text>
           </Pressable>
         </View>
@@ -36,6 +56,13 @@ export function PrivacyModal({ visible, onClose }: Props) {
             style={styles.linkBtn}
           >
             <Text style={styles.linkText}>웹에서 개인정보 처리방침 보기</Text>
+          </Pressable>
+          <Pressable
+            onPress={() => Linking.openURL(SUPPORT_URL)}
+            accessibilityRole="link"
+            style={styles.linkBtn}
+          >
+            <Text style={styles.linkText}>고객 지원 페이지</Text>
           </Pressable>
           <Pressable
             onPress={() => Linking.openURL(`mailto:${SUPPORT_EMAIL}`)}

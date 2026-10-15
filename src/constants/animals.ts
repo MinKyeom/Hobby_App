@@ -3,7 +3,8 @@ import type { AnimalCharacter } from '@/types/quiz';
 /**
  * 24 animal archetypes (12 boss + 12 employee).
  * 톤: 인신공격 대신 '유형 설명 + 소통 팁'
- * 이미지: Fluent Emoji 3D 일러스트 (MIT, 상업적 이용 가능 · 출처 표기)
+ * 이미지: Fluent Emoji 3D 일러스트 (MIT, 상업적 이용 가능)
+ * 출처·라이선스 전문은 앱 내 「오픈소스·출처」 / public/licenses.html 참고
  */
 export const ANIMALS: Record<string, AnimalCharacter> = {
   lion: {
