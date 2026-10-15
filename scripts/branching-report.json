@@ -1,0 +1,871 @@
+{
+  "boss": {
+    "role": "boss",
+    "nodeCount": 34,
+    "avgChoices": 3.21,
+    "paths": 449,
+    "pathLens": {
+      "min": 5,
+      "max": 5,
+      "avg": 5
+    },
+    "byStep": {
+      "1": [
+        {
+          "id": "boss-q1",
+          "choices": 4,
+          "prompt": "월요일 아침, 상사가 메신저로 보내는 첫 메시지 스타일은?",
+          "next": [
+            "boss-q2-care",
+            "boss-q2-focus",
+            "boss-q2-press",
+            "boss-q2-soft"
+          ]
+        }
+      ],
+      "2": [
+        {
+          "id": "boss-q2-care",
+          "choices": 3,
+          "prompt": "팀 점심·커피를 정할 때 상사의 모습은?",
+          "next": [
+            "boss-q3-crisis-warm",
+            "boss-q3-crisis-soft"
+          ]
+        },
+        {
+          "id": "boss-q2-focus",
+          "choices": 3,
+          "prompt": "주간 목표를 나눌 때 상사의 스타일은?",
+          "next": [
+            "boss-q3-crisis-focus",
+            "boss-q3-feedback-quiet"
+          ]
+        },
+        {
+          "id": "boss-q2-press",
+          "choices": 3,
+          "prompt": "업무 지시를 내릴 때 상사의 스타일은?",
+          "next": [
+            "boss-q3-feedback-loud",
+            "boss-q3-feedback-detail"
+          ]
+        },
+        {
+          "id": "boss-q2-soft",
+          "choices": 4,
+          "prompt": "애매한 요청이 왔을 때, 상사는 보통?",
+          "next": [
+            "boss-q3-crisis-soft",
+            "boss-q3-rivalry"
+          ]
+        }
+      ],
+      "3": [
+        {
+          "id": "boss-q3-crisis-warm",
+          "choices": 4,
+          "prompt": "프로젝트 중 예상치 못한 실수가 터졌을 때?",
+          "next": [
+            "boss-q4-care",
+            "boss-q4-soft",
+            "boss-q4-care-follow",
+            "boss-q4-focus"
+          ]
+        },
+        {
+          "id": "boss-q3-crisis-focus",
+          "choices": 3,
+          "prompt": "일정이 꼬였을 때 상사의 첫 반응은?",
+          "next": [
+            "boss-q4-focus",
+            "boss-q4-focus-vision",
+            "boss-q4-focus-data"
+          ]
+        },
+        {
+          "id": "boss-q3-crisis-soft",
+          "choices": 3,
+          "prompt": "실수 상황에서 상사의 분위기는?",
+          "next": [
+            "boss-q4-soft",
+            "boss-q4-soft-haze",
+            "boss-q4-press-tense"
+          ]
+        },
+        {
+          "id": "boss-q3-feedback-loud",
+          "choices": 4,
+          "prompt": "팀원에게 피드백을 줄 때 방식은?",
+          "next": [
+            "boss-q4-press",
+            "boss-q4-rivalry",
+            "boss-q4-soft-haze"
+          ]
+        },
+        {
+          "id": "boss-q3-rivalry",
+          "choices": 4,
+          "prompt": "팀원의 성과가 눈에 띌 때 상사의 반응은?",
+          "next": [
+            "boss-q4-rivalry",
+            "boss-q4-rivalry-access",
+            "boss-q4-care-follow"
+          ]
+        },
+        {
+          "id": "boss-q3-feedback-detail",
+          "choices": 3,
+          "prompt": "결과물을 볼 때 상사가 가장 먼저 하는 일은?",
+          "next": [
+            "boss-q4-press-detail",
+            "boss-q4-press",
+            "boss-q4-press-tense"
+          ]
+        },
+        {
+          "id": "boss-q3-feedback-quiet",
+          "choices": 3,
+          "prompt": "1:1에서 상사의 피드백 톤은?",
+          "next": [
+            "boss-q4-focus-data",
+            "boss-q4-care-follow",
+            "boss-q4-focus-cool"
+          ]
+        }
+      ],
+      "4": [
+        {
+          "id": "boss-q4-care",
+          "choices": 3,
+          "prompt": "팀원이 실수를 했을 때 지적 방식은?",
+          "next": [
+            "boss-q5-care",
+            "boss-q5-soft",
+            "boss-q5-focus"
+          ]
+        },
+        {
+          "id": "boss-q4-care-follow",
+          "choices": 3,
+          "prompt": "위기 후, 상사가 사람을 챙기는 방식은?",
+          "next": [
+            "boss-q5-care",
+            "boss-q5-care-recover",
+            "boss-q5-focus"
+          ]
+        },
+        {
+          "id": "boss-q4-focus",
+          "choices": 3,
+          "prompt": "성과 리뷰 자리에서 상사가 강조하는 것은?",
+          "next": [
+            "boss-q5-focus",
+            "boss-q5-focus-learn",
+            "boss-q5-press"
+          ]
+        },
+        {
+          "id": "boss-q4-focus-vision",
+          "choices": 3,
+          "prompt": "큰 그림 이야기를 할 때 상사의 스타일은?",
+          "next": [
+            "boss-q5-focus",
+            "boss-q5-focus-learn",
+            "boss-q5-soft"
+          ]
+        },
+        {
+          "id": "boss-q4-focus-data",
+          "choices": 3,
+          "prompt": "근거·데이터를 볼 때 상사의 태도는?",
+          "next": [
+            "boss-q5-focus-learn",
+            "boss-q5-focus",
+            "boss-q5-press-control"
+          ]
+        },
+        {
+          "id": "boss-q4-focus-cool",
+          "choices": 3,
+          "prompt": "피드백 온도가 낮을 때, 후속 소통은?",
+          "next": [
+            "boss-q5-focus",
+            "boss-q5-press-control",
+            "boss-q5-care-recover"
+          ]
+        },
+        {
+          "id": "boss-q4-soft",
+          "choices": 3,
+          "prompt": "다른 팀/상사 이야기가 나올 때 모습은?",
+          "next": [
+            "boss-q5-soft",
+            "boss-q5-press",
+            "boss-q5-care"
+          ]
+        },
+        {
+          "id": "boss-q4-soft-haze",
+          "choices": 3,
+          "prompt": "지시가 모호할 때 상사의 후속은?",
+          "next": [
+            "boss-q5-soft",
+            "boss-q5-soft-clarity",
+            "boss-q5-focus-learn"
+          ]
+        },
+        {
+          "id": "boss-q4-press",
+          "choices": 3,
+          "prompt": "마감 직전, 상사의 커뮤니케이션은?",
+          "next": [
+            "boss-q5-press",
+            "boss-q5-press-control"
+          ]
+        },
+        {
+          "id": "boss-q4-press-tense",
+          "choices": 3,
+          "prompt": "팀 긴장도가 올라갔을 때 상사의 태도는?",
+          "next": [
+            "boss-q5-press",
+            "boss-q5-rivalry",
+            "boss-q5-care-recover"
+          ]
+        },
+        {
+          "id": "boss-q4-rivalry",
+          "choices": 3,
+          "prompt": "성과·칭찬이 오갈 때 상사의 톤은?",
+          "next": [
+            "boss-q5-rivalry",
+            "boss-q5-care"
+          ]
+        },
+        {
+          "id": "boss-q4-rivalry-access",
+          "choices": 3,
+          "prompt": "기회·정보·챙김이 나뉠 때 모습은?",
+          "next": [
+            "boss-q5-rivalry",
+            "boss-q5-care-recover"
+          ]
+        },
+        {
+          "id": "boss-q4-press-detail",
+          "choices": 3,
+          "prompt": "디테일 수정이 이어질 때 상사의 방식은?",
+          "next": [
+            "boss-q5-press-control",
+            "boss-q5-press",
+            "boss-q5-focus"
+          ]
+        }
+      ],
+      "5": [
+        {
+          "id": "boss-q5-care",
+          "choices": 4,
+          "prompt": "퇴근 10분 전, 상사의 태도는?",
+          "next": [
+            "RESULT"
+          ]
+        },
+        {
+          "id": "boss-q5-focus",
+          "choices": 3,
+          "prompt": "주말·휴가 전날 상사의 메시지는?",
+          "next": [
+            "RESULT"
+          ]
+        },
+        {
+          "id": "boss-q5-soft",
+          "choices": 3,
+          "prompt": "업무 외 시간에 연락이 올 때 느낌은?",
+          "next": [
+            "RESULT"
+          ]
+        },
+        {
+          "id": "boss-q5-press",
+          "choices": 3,
+          "prompt": "야근·주말 연락에 대한 상사의 태도는?",
+          "next": [
+            "RESULT"
+          ]
+        },
+        {
+          "id": "boss-q5-care-recover",
+          "choices": 3,
+          "prompt": "팀이 지쳤을 때 상사가 먼저 하는 일은?",
+          "next": [
+            "RESULT"
+          ]
+        },
+        {
+          "id": "boss-q5-focus-learn",
+          "choices": 3,
+          "prompt": "한 분기 끝에 상사가 남기는 메시지는?",
+          "next": [
+            "RESULT"
+          ]
+        },
+        {
+          "id": "boss-q5-soft-clarity",
+          "choices": 3,
+          "prompt": "모호함이 쌓였을 때 상사가 하는 일은?",
+          "next": [
+            "RESULT"
+          ]
+        },
+        {
+          "id": "boss-q5-press-control",
+          "choices": 3,
+          "prompt": "마감 직후 점검 분위기는?",
+          "next": [
+            "RESULT"
+          ]
+        },
+        {
+          "id": "boss-q5-rivalry",
+          "choices": 4,
+          "prompt": "팀원과 성과를 나란히 둘 때 상사의 태도는?",
+          "next": [
+            "RESULT"
+          ]
+        }
+      ]
+    },
+    "merges": [
+      {
+        "id": "boss-q3-crisis-soft",
+        "from": [
+          "boss-q2-care",
+          "boss-q2-soft"
+        ]
+      },
+      {
+        "id": "boss-q4-soft",
+        "from": [
+          "boss-q3-crisis-warm",
+          "boss-q3-crisis-soft"
+        ]
+      },
+      {
+        "id": "boss-q4-care-follow",
+        "from": [
+          "boss-q3-crisis-warm",
+          "boss-q3-rivalry",
+          "boss-q3-feedback-quiet"
+        ]
+      },
+      {
+        "id": "boss-q4-focus",
+        "from": [
+          "boss-q3-crisis-warm",
+          "boss-q3-crisis-focus"
+        ]
+      },
+      {
+        "id": "boss-q4-focus-data",
+        "from": [
+          "boss-q3-crisis-focus",
+          "boss-q3-feedback-quiet"
+        ]
+      },
+      {
+        "id": "boss-q4-soft-haze",
+        "from": [
+          "boss-q3-crisis-soft",
+          "boss-q3-feedback-loud"
+        ]
+      },
+      {
+        "id": "boss-q4-press-tense",
+        "from": [
+          "boss-q3-crisis-soft",
+          "boss-q3-feedback-detail"
+        ]
+      },
+      {
+        "id": "boss-q4-press",
+        "from": [
+          "boss-q3-feedback-loud",
+          "boss-q3-feedback-detail"
+        ]
+      },
+      {
+        "id": "boss-q4-rivalry",
+        "from": [
+          "boss-q3-feedback-loud",
+          "boss-q3-rivalry"
+        ]
+      },
+      {
+        "id": "boss-q5-care",
+        "from": [
+          "boss-q4-care",
+          "boss-q4-care-follow",
+          "boss-q4-soft",
+          "boss-q4-rivalry"
+        ]
+      },
+      {
+        "id": "boss-q5-soft",
+        "from": [
+          "boss-q4-care",
+          "boss-q4-focus-vision",
+          "boss-q4-soft",
+          "boss-q4-soft-haze"
+        ]
+      },
+      {
+        "id": "boss-q5-focus",
+        "from": [
+          "boss-q4-care",
+          "boss-q4-care-follow",
+          "boss-q4-focus",
+          "boss-q4-focus-vision",
+          "boss-q4-focus-data",
+          "boss-q4-focus-cool",
+          "boss-q4-press-detail"
+        ]
+      },
+      {
+        "id": "boss-q5-care-recover",
+        "from": [
+          "boss-q4-care-follow",
+          "boss-q4-focus-cool",
+          "boss-q4-press-tense",
+          "boss-q4-rivalry-access"
+        ]
+      },
+      {
+        "id": "boss-q5-focus-learn",
+        "from": [
+          "boss-q4-focus",
+          "boss-q4-focus-vision",
+          "boss-q4-focus-data",
+          "boss-q4-soft-haze"
+        ]
+      },
+      {
+        "id": "boss-q5-press",
+        "from": [
+          "boss-q4-focus",
+          "boss-q4-soft",
+          "boss-q4-press",
+          "boss-q4-press-tense",
+          "boss-q4-press-detail"
+        ]
+      },
+      {
+        "id": "boss-q5-press-control",
+        "from": [
+          "boss-q4-focus-data",
+          "boss-q4-focus-cool",
+          "boss-q4-press",
+          "boss-q4-press-detail"
+        ]
+      },
+      {
+        "id": "boss-q5-rivalry",
+        "from": [
+          "boss-q4-press-tense",
+          "boss-q4-rivalry",
+          "boss-q4-rivalry-access"
+        ]
+      }
+    ],
+    "weak": [],
+    "samples": [
+      [
+        "boss-q1",
+        "warm->boss-q2-care",
+        "decide->boss-q3-crisis-warm",
+        "lead->boss-q4-care",
+        "private->boss-q5-care",
+        "sendoff->END"
+      ],
+      [
+        "boss-q1",
+        "warm->boss-q2-care",
+        "decide->boss-q3-crisis-warm",
+        "lead->boss-q4-care",
+        "private->boss-q5-care",
+        "uneven->END"
+      ],
+      [
+        "boss-q1",
+        "warm->boss-q2-care",
+        "decide->boss-q3-crisis-warm",
+        "lead->boss-q4-care",
+        "private->boss-q5-care",
+        "checkin->END"
+      ],
+      [
+        "boss-q1",
+        "warm->boss-q2-care",
+        "decide->boss-q3-crisis-warm",
+        "lead->boss-q4-care",
+        "private->boss-q5-care",
+        "oneMore->END"
+      ],
+      [
+        "boss-q1",
+        "warm->boss-q2-care",
+        "decide->boss-q3-crisis-warm",
+        "lead->boss-q4-care",
+        "story->boss-q5-soft",
+        "casual->END"
+      ]
+    ]
+  },
+  "employee": {
+    "role": "employee",
+    "nodeCount": 18,
+    "avgChoices": 3.11,
+    "paths": 387,
+    "pathLens": {
+      "min": 5,
+      "max": 5,
+      "avg": 5
+    },
+    "byStep": {
+      "1": [
+        {
+          "id": "emp-q1",
+          "choices": 4,
+          "prompt": "어려운 새 프로젝트가 주어졌을 때 부하 직원의 첫 반응은?",
+          "next": [
+            "emp-q2-drive",
+            "emp-q2-collab",
+            "emp-q2-pace",
+            "emp-q2-guard"
+          ]
+        }
+      ],
+      "2": [
+        {
+          "id": "emp-q2-drive",
+          "choices": 3,
+          "prompt": "진행 상황을 공유하는 방식은?",
+          "next": [
+            "emp-q3-mistake-open",
+            "emp-q3-mistake-solo"
+          ]
+        },
+        {
+          "id": "emp-q2-collab",
+          "choices": 3,
+          "prompt": "팀 미팅에서의 모습은?",
+          "next": [
+            "emp-q3-mistake-open",
+            "emp-q3-busy-steady"
+          ]
+        },
+        {
+          "id": "emp-q2-pace",
+          "choices": 3,
+          "prompt": "마감이 다가올 때 페이스는?",
+          "next": [
+            "emp-q3-busy-steady",
+            "emp-q3-busy-slow"
+          ]
+        },
+        {
+          "id": "emp-q2-guard",
+          "choices": 3,
+          "prompt": "업무 부담이 커졌을 때 반응은?",
+          "next": [
+            "emp-q3-feedback-def",
+            "emp-q3-busy-energy"
+          ]
+        }
+      ],
+      "3": [
+        {
+          "id": "emp-q3-mistake-open",
+          "choices": 3,
+          "prompt": "본인 실수를 깨달았을 때?",
+          "next": [
+            "emp-q4-submit-good"
+          ]
+        },
+        {
+          "id": "emp-q3-mistake-solo",
+          "choices": 3,
+          "prompt": "일이 막혔을 때 보통?",
+          "next": [
+            "emp-q4-submit-mix"
+          ]
+        },
+        {
+          "id": "emp-q3-busy-steady",
+          "choices": 3,
+          "prompt": "팀이 바쁠 때 이 사람의 존재감은?",
+          "next": [
+            "emp-q4-submit-good"
+          ]
+        },
+        {
+          "id": "emp-q3-busy-slow",
+          "choices": 3,
+          "prompt": "바쁜 날 마감 전달 태도는?",
+          "next": [
+            "emp-q4-submit-slow"
+          ]
+        },
+        {
+          "id": "emp-q3-busy-energy",
+          "choices": 3,
+          "prompt": "야근·바쁜 날의 행동은?",
+          "next": [
+            "emp-q4-social"
+          ]
+        },
+        {
+          "id": "emp-q3-feedback-def",
+          "choices": 3,
+          "prompt": "피드백을 받았을 때 반응은?",
+          "next": [
+            "emp-q4-social"
+          ]
+        }
+      ],
+      "4": [
+        {
+          "id": "emp-q4-submit-good",
+          "choices": 3,
+          "prompt": "업무를 완성했을 때 제출 방식은?",
+          "next": [
+            "emp-q5-team"
+          ]
+        },
+        {
+          "id": "emp-q4-submit-mix",
+          "choices": 3,
+          "prompt": "결과물 공유 타이밍은?",
+          "next": [
+            "emp-q5-team"
+          ]
+        },
+        {
+          "id": "emp-q4-submit-slow",
+          "choices": 3,
+          "prompt": "마감 당일 모습은?",
+          "next": [
+            "emp-q5-pace"
+          ]
+        },
+        {
+          "id": "emp-q4-social",
+          "choices": 3,
+          "prompt": "팀 회식·단체 모임에서의 모습은?",
+          "next": [
+            "emp-q5-space"
+          ]
+        }
+      ],
+      "5": [
+        {
+          "id": "emp-q5-team",
+          "choices": 4,
+          "prompt": "팀 전체가 바쁠 때 행동은?",
+          "next": [
+            "RESULT"
+          ]
+        },
+        {
+          "id": "emp-q5-pace",
+          "choices": 3,
+          "prompt": "다음 프로젝트에서 가장 필요한 지원은?",
+          "next": [
+            "RESULT"
+          ]
+        },
+        {
+          "id": "emp-q5-space",
+          "choices": 3,
+          "prompt": "좋은 협업을 위해 팀에 바라는 점은?",
+          "next": [
+            "RESULT"
+          ]
+        }
+      ]
+    },
+    "merges": [
+      {
+        "id": "emp-q3-mistake-open",
+        "from": [
+          "emp-q2-drive",
+          "emp-q2-collab"
+        ]
+      },
+      {
+        "id": "emp-q3-busy-steady",
+        "from": [
+          "emp-q2-collab",
+          "emp-q2-pace"
+        ]
+      },
+      {
+        "id": "emp-q4-submit-good",
+        "from": [
+          "emp-q3-mistake-open",
+          "emp-q3-busy-steady"
+        ]
+      },
+      {
+        "id": "emp-q4-social",
+        "from": [
+          "emp-q3-busy-energy",
+          "emp-q3-feedback-def"
+        ]
+      },
+      {
+        "id": "emp-q5-team",
+        "from": [
+          "emp-q4-submit-good",
+          "emp-q4-submit-mix"
+        ]
+      }
+    ],
+    "weak": [
+      {
+        "id": "emp-q3-mistake-open",
+        "step": 3,
+        "choices": 3,
+        "uniqueNext": 1,
+        "next": [
+          "emp-q4-submit-good"
+        ]
+      },
+      {
+        "id": "emp-q3-mistake-solo",
+        "step": 3,
+        "choices": 3,
+        "uniqueNext": 1,
+        "next": [
+          "emp-q4-submit-mix"
+        ]
+      },
+      {
+        "id": "emp-q3-busy-steady",
+        "step": 3,
+        "choices": 3,
+        "uniqueNext": 1,
+        "next": [
+          "emp-q4-submit-good"
+        ]
+      },
+      {
+        "id": "emp-q3-busy-slow",
+        "step": 3,
+        "choices": 3,
+        "uniqueNext": 1,
+        "next": [
+          "emp-q4-submit-slow"
+        ]
+      },
+      {
+        "id": "emp-q3-busy-energy",
+        "step": 3,
+        "choices": 3,
+        "uniqueNext": 1,
+        "next": [
+          "emp-q4-social"
+        ]
+      },
+      {
+        "id": "emp-q3-feedback-def",
+        "step": 3,
+        "choices": 3,
+        "uniqueNext": 1,
+        "next": [
+          "emp-q4-social"
+        ]
+      },
+      {
+        "id": "emp-q4-submit-good",
+        "step": 4,
+        "choices": 3,
+        "uniqueNext": 1,
+        "next": [
+          "emp-q5-team"
+        ]
+      },
+      {
+        "id": "emp-q4-submit-mix",
+        "step": 4,
+        "choices": 3,
+        "uniqueNext": 1,
+        "next": [
+          "emp-q5-team"
+        ]
+      },
+      {
+        "id": "emp-q4-submit-slow",
+        "step": 4,
+        "choices": 3,
+        "uniqueNext": 1,
+        "next": [
+          "emp-q5-pace"
+        ]
+      },
+      {
+        "id": "emp-q4-social",
+        "step": 4,
+        "choices": 3,
+        "uniqueNext": 1,
+        "next": [
+          "emp-q5-space"
+        ]
+      }
+    ],
+    "samples": [
+      [
+        "emp-q1",
+        "challenge->emp-q2-drive",
+        "proactive->emp-q3-mistake-open",
+        "report->emp-q4-submit-good",
+        "clean->emp-q5-team",
+        "helpAll->END"
+      ],
+      [
+        "emp-q1",
+        "challenge->emp-q2-drive",
+        "proactive->emp-q3-mistake-open",
+        "report->emp-q4-submit-good",
+        "clean->emp-q5-team",
+        "ownFirst->END"
+      ],
+      [
+        "emp-q1",
+        "challenge->emp-q2-drive",
+        "proactive->emp-q3-mistake-open",
+        "report->emp-q4-submit-good",
+        "clean->emp-q5-team",
+        "cheer->END"
+      ],
+      [
+        "emp-q1",
+        "challenge->emp-q2-drive",
+        "proactive->emp-q3-mistake-open",
+        "report->emp-q4-submit-good",
+        "clean->emp-q5-team",
+        "backbone->END"
+      ],
+      [
+        "emp-q1",
+        "challenge->emp-q2-drive",
+        "proactive->emp-q3-mistake-open",
+        "report->emp-q4-submit-good",
+        "polite->emp-q5-team",
+        "helpAll->END"
+      ]
+    ]
+  }
+}

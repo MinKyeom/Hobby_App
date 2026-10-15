@@ -16,9 +16,9 @@
 - [x] Error Boundary / 빈 화면 리다이렉트
 
 ## 3. 미디어 / 저작권
-- [x] OpenMoji 동물 일러스트 로컬 패키징 (`assets/animals/illustrations/`, CC BY-SA 4.0)
+- [x] Fluent Emoji 3D 동물 일러스트 로컬 패키징 (`assets/animals/illustrations/`, MIT)
 - [x] 사람 얼굴·브랜드 로고 배제 큐레이션
-- [x] 카드에 OpenMoji 출처·라이선스 표기
+- [x] 카드에 Fluent Emoji 출처·라이선스 표기
 
 ## 4. 개인정보
 - [x] Guest Mode Only

@@ -1,9 +1,15 @@
 # Animal Illustrations Attribution
 
-Illustrations are from **[OpenMoji](https://openmoji.org/)**  
-License: **CC BY-SA 4.0** (commercial use allowed with attribution)
+Illustrations are **Microsoft Fluent Emoji (3D)**  
+License: **MIT** (commercial use allowed)
 
-https://github.com/hfg-gmuend/openmoji
+- Source: https://github.com/microsoft/fluentui-emoji  
+- Copyright © Microsoft Corporation
 
-App credit line shown on result cards:
-`Illustration: OpenMoji (OpenMoji) · CC BY-SA 4.0`
+Closest emoji used when a species has no dedicated asset:
+- chameleon → Lizard
+- meerkat → Otter
+- squirrel → Chipmunk
+
+App credit line on result cards:
+`Illustration: Fluent Emoji (Microsoft) · MIT`

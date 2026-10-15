@@ -1,7 +1,6 @@
-import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { forwardRef } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 import { AbilityBars } from '@/components/AbilityBars';
 import type { AbilityScore } from '@/constants/abilities';
@@ -16,6 +15,13 @@ interface Props {
   role: Role;
 }
 
+const TIER_LABEL: Record<AnimalCharacter['tier'], string> = {
+  best: '베스트 케어',
+  good: '든든형',
+  mixed: '반전매력',
+  bad: '성장중',
+};
+
 export const ResultCard = forwardRef<View, Props>(function ResultCard(
   { animal, photographer, abilities, role },
   ref,
@@ -29,17 +35,28 @@ export const ResultCard = forwardRef<View, Props>(function ResultCard(
   return (
     <View ref={ref} collapsable={false} style={styles.card}>
       <Text style={styles.brand}>{APP_NAME_SHORT}</Text>
-      <Text style={styles.kicker}>{roleLabel} · 웃긴 동물 일러스트 카드</Text>
+      <Text style={styles.kicker}>{roleLabel} · 웃긴 동물 진단 카드</Text>
 
       <LinearGradient colors={[...artBg]} style={styles.imageWrap}>
+        <View style={styles.sparkleRow}>
+          <Text style={styles.sparkle}>✨</Text>
+          <Text style={styles.sparkle}>💫</Text>
+          <Text style={styles.sparkle}>✨</Text>
+        </View>
+        {/* RN Image: view-shot 캡처 호환성 (expo-image보다 안정) */}
         <Image
           source={animal.localImage}
           style={styles.image}
-          contentFit="contain"
+          resizeMode="contain"
           accessibilityLabel={`${animal.animalName} 일러스트`}
         />
+        <View style={styles.speech}>
+          <Text style={styles.speechText}>
+            {animal.emoji} 오늘도 {animal.animalName} 모드!
+          </Text>
+        </View>
         <View style={styles.tierChip}>
-          <Text style={styles.tierText}>{animal.tier.toUpperCase()}</Text>
+          <Text style={styles.tierText}>{TIER_LABEL[animal.tier]}</Text>
         </View>
       </LinearGradient>
 
@@ -70,7 +87,7 @@ export const ResultCard = forwardRef<View, Props>(function ResultCard(
         </View>
       ) : null}
       <Text style={styles.credit}>
-        Illustration: {photographer} ({animal.creditSource}) · CC BY-SA 4.0
+        Illustration: {photographer} ({animal.creditSource}) · MIT
       </Text>
     </View>
   );
@@ -104,7 +121,7 @@ const styles = StyleSheet.create({
     marginTop: -4,
   },
   imageWrap: {
-    height: 260,
+    height: 300,
     borderRadius: radii.lg,
     overflow: 'hidden',
     marginVertical: spacing.sm,
@@ -113,14 +130,43 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.line,
   },
+  sparkleRow: {
+    position: 'absolute',
+    top: 12,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  sparkle: {
+    fontSize: 16,
+    opacity: 0.85,
+  },
   image: {
-    width: '72%',
-    height: '72%',
+    width: '78%',
+    height: '68%',
+  },
+  speech: {
+    position: 'absolute',
+    left: 12,
+    bottom: 12,
+    maxWidth: '70%',
+    backgroundColor: colors.white,
+    borderRadius: radii.pill,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderWidth: 1,
+    borderColor: colors.line,
+  },
+  speechText: {
+    fontFamily: 'NotoSansKR_700Bold',
+    fontSize: 12,
+    color: colors.ink,
   },
   tierChip: {
     position: 'absolute',
     right: 10,
-    bottom: 10,
+    top: 10,
     backgroundColor: colors.sunny,
     paddingHorizontal: 10,
     paddingVertical: 4,

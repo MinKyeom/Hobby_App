@@ -37,7 +37,7 @@ export interface AnimalCharacter {
   localImage: number;
   photographer: string;
   photographerUrl: string;
-  creditSource: 'Pexels' | 'Pixabay' | 'Wikimedia' | 'OpenMoji';
+  creditSource: 'Pexels' | 'Pixabay' | 'Wikimedia' | 'OpenMoji' | 'FluentEmoji';
 }
 
 export interface QuizAnswer {

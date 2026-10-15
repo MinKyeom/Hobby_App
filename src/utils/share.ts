@@ -1,7 +1,13 @@
 import * as Linking from 'expo-linking';
 import * as Sharing from 'expo-sharing';
 import type { RefObject } from 'react';
-import { Alert, Platform, Share, type View } from 'react-native';
+import {
+  Alert,
+  InteractionManager,
+  Platform,
+  Share,
+  type View,
+} from 'react-native';
 import { captureRef } from 'react-native-view-shot';
 
 import type { AbilityScore } from '@/constants/abilities';
@@ -9,6 +15,8 @@ import { APP_NAME } from '@/constants/brand';
 import type { AnimalCharacter } from '@/types/quiz';
 
 export type ShareChannel = 'kakao' | 'twitter' | 'facebook' | 'instagram' | 'system';
+
+const RESULT_FILENAME = 'workplace-animal-diagnosis-result.png';
 
 function buildShareText(animal: AnimalCharacter, abilities: AbilityScore[] = []): string {
   const top = [...abilities].sort((a, b) => b.value - a.value).slice(0, 3);
@@ -27,14 +35,30 @@ function buildShareText(animal: AnimalCharacter, abilities: AbilityScore[] = [])
   ].join('\n');
 }
 
+function waitForInteractions(): Promise<void> {
+  return new Promise((resolve) => {
+    InteractionManager.runAfterInteractions(() => {
+      setTimeout(resolve, 120);
+    });
+  });
+}
+
 /** 웹은 data-uri, 네이티브는 tmpfile (웹에서 tmpfile 경고 방지) */
 async function captureCard(viewRef: RefObject<View | null>): Promise<string | null> {
   if (!viewRef.current) return null;
-  return captureRef(viewRef, {
-    format: 'png',
-    quality: 1,
-    result: Platform.OS === 'web' ? 'data-uri' : 'tmpfile',
-  });
+  await waitForInteractions();
+
+  try {
+    return await captureRef(viewRef, {
+      format: 'png',
+      quality: 1,
+      result: Platform.OS === 'web' ? 'data-uri' : 'tmpfile',
+      // ScrollView 안 긴 카드도 잘리거나 투명해지지 않도록
+      handleGLSurfaceViewOnAndroid: true,
+    });
+  } catch {
+    return null;
+  }
 }
 
 function downloadDataUri(dataUri: string, filename: string) {
@@ -63,7 +87,7 @@ async function shareImageWeb(dataUri: string, message: string): Promise<void> {
   try {
     const response = await fetch(dataUri);
     const blob = await response.blob();
-    const file = new File([blob], 'workplace-animal-farm-result.png', { type: 'image/png' });
+    const file = new File([blob], RESULT_FILENAME, { type: 'image/png' });
     const nav = typeof navigator !== 'undefined' ? navigator : null;
 
     if (nav && typeof nav.share === 'function') {
@@ -77,7 +101,7 @@ async function shareImageWeb(dataUri: string, message: string): Promise<void> {
     // Web Share API 미지원/거부 시 다운로드로 폴백
   }
 
-  downloadDataUri(dataUri, 'workplace-animal-farm-result.png');
+  downloadDataUri(dataUri, RESULT_FILENAME);
   await shareTextFallback(message, APP_NAME);
 }
 
@@ -137,29 +161,76 @@ export async function shareViaChannel(
 
 async function saveOnWeb(viewRef: RefObject<View | null>): Promise<boolean> {
   const dataUri = await captureCard(viewRef);
-  if (!dataUri) return false;
-  downloadDataUri(dataUri, 'workplace-animal-farm-result.png');
+  if (!dataUri) {
+    Alert.alert('저장 실패', '결과 카드를 캡처하지 못했어요. 다시 시도해 주세요.');
+    return false;
+  }
+  downloadDataUri(dataUri, RESULT_FILENAME);
   Alert.alert('저장 완료', '결과 이미지 다운로드가 시작되었어요.');
   return true;
 }
 
+/**
+ * Android 13+ / iOS 모두: writeOnly 권한 → createAssetAsync 우선.
+ * 갤러리 저장이 막히면 공유 시트로 폴백해 "이미지로 저장"이 가능하게 합니다.
+ */
 async function saveOnNative(viewRef: RefObject<View | null>): Promise<boolean> {
-  const MediaLibrary = await import('expo-media-library/legacy');
-  const permission = await MediaLibrary.requestPermissionsAsync();
-  if (!permission.granted) {
-    Alert.alert('권한 필요', '결과 이미지를 저장하려면 사진 라이브러리 접근이 필요해요.');
-    return false;
-  }
-
   const uri = await captureCard(viewRef);
   if (!uri) {
-    Alert.alert('저장 실패', '결과 카드를 캡처하지 못했어요.');
+    Alert.alert('저장 실패', '결과 카드를 캡처하지 못했어요. 화면을 잠시 둔 뒤 다시 시도해 주세요.');
     return false;
   }
 
-  await MediaLibrary.saveToLibraryAsync(uri);
-  Alert.alert('저장 완료', '결과 이미지가 사진첩에 저장되었어요.');
-  return true;
+  try {
+    const MediaLibrary = await import('expo-media-library/legacy');
+    // writeOnly=true: 저장만 할 때 권한 부담을 줄입니다 (Android 권장)
+    const permission = await MediaLibrary.requestPermissionsAsync(true);
+    if (!permission.granted) {
+      Alert.alert(
+        '권한 필요',
+        '결과 이미지를 사진첩에 저장하려면 권한이 필요해요. 설정에서 허용한 뒤 다시 시도하거나, 공유로 저장할 수 있어요.',
+        [
+          { text: '취소', style: 'cancel' },
+          {
+            text: '공유로 저장',
+            onPress: () => {
+              void shareImageNative(uri, '결과 이미지 저장/공유');
+            },
+          },
+        ],
+      );
+      return false;
+    }
+
+    try {
+      await MediaLibrary.createAssetAsync(uri);
+    } catch {
+      // 일부 기기/Expo Go에서 createAsset 실패 시 레거시 API 재시도
+      await MediaLibrary.saveToLibraryAsync(uri);
+    }
+
+    Alert.alert('저장 완료', '결과 이미지가 사진첩에 저장되었어요.');
+    return true;
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : '';
+    // MediaLibrary가 Expo Go/권한 이슈로 막힐 때 공유 시트로 폴백
+    try {
+      await shareImageNative(uri, '결과 이미지 저장/공유');
+      Alert.alert(
+        '공유 시트로 열었어요',
+        '사진첩 직접 저장이 막혀서 공유 시트를 열었어요. 여기서 “이미지 저장” 또는 갤러리 앱을 골라 주세요.',
+      );
+      return true;
+    } catch {
+      Alert.alert(
+        '저장 실패',
+        detail
+          ? `이미지 저장 중 문제가 발생했어요.\n(${detail})`
+          : '이미지 저장 중 문제가 발생했어요. 권한을 허용한 뒤 다시 시도해 주세요.',
+      );
+      return false;
+    }
+  }
 }
 
 export async function saveResultImage(viewRef: RefObject<View | null>): Promise<boolean> {
@@ -168,8 +239,14 @@ export async function saveResultImage(viewRef: RefObject<View | null>): Promise<
       return await saveOnWeb(viewRef);
     }
     return await saveOnNative(viewRef);
-  } catch {
-    Alert.alert('저장 실패', '이미지 저장 중 문제가 발생했어요.');
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : '';
+    Alert.alert(
+      '저장 실패',
+      detail
+        ? `이미지 저장 중 문제가 발생했어요.\n(${detail})`
+        : '이미지 저장 중 문제가 발생했어요.',
+    );
     return false;
   }
 }
