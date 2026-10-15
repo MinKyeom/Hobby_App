@@ -9,7 +9,8 @@ interface Props {
   busy: boolean;
   onShare: (channel: ShareChannel) => void;
   onSave: () => void;
-  onRetry: () => void;
+  /** 하단 고정 바에 저장 버튼이 있을 때 숨김 */
+  hideSave?: boolean;
 }
 
 type ChannelDef = {
@@ -66,15 +67,32 @@ const CHANNELS: ChannelDef[] = [
   },
 ];
 
-export function ShareActions({ busy, onShare, onSave, onRetry }: Props) {
+export function ShareActions({ busy, onShare, onSave, hideSave = false }: Props) {
   return (
     <View style={styles.wrap}>
+      {!hideSave ? (
+        <Pressable
+          disabled={busy}
+          onPress={onSave}
+          accessibilityRole="button"
+          accessibilityLabel="결과 이미지 저장"
+          style={({ pressed }) => [styles.primarySave, pressed && styles.pressed]}
+        >
+          {busy ? (
+            <ActivityIndicator color={colors.white} />
+          ) : (
+            <View style={styles.primaryInner}>
+              <FontAwesome6 name="download" size={16} color={colors.white} />
+              <Text style={styles.primaryText}>이미지로 저장</Text>
+            </View>
+          )}
+        </Pressable>
+      ) : null}
+
       <Text style={styles.heading} accessibilityRole="header">
-        결과 공유하기
+        SNS로 공유하기
       </Text>
-      <Text style={styles.sub}>
-        아이콘을 누르면 결과 카드와 함께 공유 시트가 열려요
-      </Text>
+      <Text style={styles.sub}>원하는 앱 아이콘을 눌러 주세요</Text>
 
       <View style={styles.iconRow}>
         {CHANNELS.map((ch) => (
@@ -100,32 +118,6 @@ export function ShareActions({ busy, onShare, onSave, onRetry }: Props) {
           </Pressable>
         ))}
       </View>
-
-      <Pressable
-        disabled={busy}
-        onPress={onSave}
-        accessibilityRole="button"
-        accessibilityLabel="결과 이미지 저장"
-        style={({ pressed }) => [styles.secondary, pressed && styles.pressed]}
-      >
-        {busy ? (
-          <ActivityIndicator color={colors.accent} />
-        ) : (
-          <View style={styles.secondaryInner}>
-            <FontAwesome6 name="download" size={16} color={colors.accent} />
-            <Text style={styles.secondaryText}>결과 이미지 저장</Text>
-          </View>
-        )}
-      </Pressable>
-
-      <Pressable
-        onPress={onRetry}
-        accessibilityRole="button"
-        accessibilityLabel="다시 테스트하기"
-        style={({ pressed }) => [styles.retry, pressed && styles.pressed]}
-      >
-        <Text style={styles.retryText}>다시 테스트하기</Text>
-      </Pressable>
     </View>
   );
 }
@@ -134,10 +126,29 @@ const styles = StyleSheet.create({
   wrap: {
     gap: spacing.md,
   },
+  primarySave: {
+    borderRadius: radii.md,
+    backgroundColor: colors.accent,
+    paddingVertical: 16,
+    alignItems: 'center',
+    minHeight: 54,
+    justifyContent: 'center',
+  },
+  primaryInner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  primaryText: {
+    fontFamily: 'NotoSansKR_700Bold',
+    fontSize: 16,
+    color: colors.white,
+  },
   heading: {
     fontFamily: 'NotoSansKR_700Bold',
-    fontSize: 18,
+    fontSize: 16,
     color: colors.ink,
+    marginTop: spacing.xs,
   },
   sub: {
     fontFamily: 'NotoSansKR_400Regular',
@@ -148,65 +159,33 @@ const styles = StyleSheet.create({
   },
   iconRow: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     justifyContent: 'space-between',
-    gap: 10,
+    gap: 6,
     paddingVertical: 4,
   },
   iconBtn: {
-    width: '18%',
-    minWidth: 58,
+    flex: 1,
     alignItems: 'center',
     gap: 8,
+    minWidth: 56,
   },
   iconCircle: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+    width: 52,
+    height: 52,
+    borderRadius: 26,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: colors.shadow,
-    shadowOpacity: 0.18,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 3 },
-    elevation: 3,
+    shadowOpacity: 0.16,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 2,
   },
   iconLabel: {
     fontFamily: 'NotoSansKR_500Medium',
     fontSize: 11,
     color: colors.inkMuted,
     textAlign: 'center',
-  },
-  secondary: {
-    borderRadius: radii.md,
-    borderWidth: 1.5,
-    borderColor: colors.accent,
-    paddingVertical: 14,
-    alignItems: 'center',
-    backgroundColor: colors.white,
-    minHeight: 52,
-    justifyContent: 'center',
-  },
-  secondaryInner: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  secondaryText: {
-    fontFamily: 'NotoSansKR_700Bold',
-    fontSize: 15,
-    color: colors.accent,
-  },
-  retry: {
-    borderRadius: radii.md,
-    backgroundColor: colors.accent,
-    paddingVertical: 16,
-    alignItems: 'center',
-  },
-  retryText: {
-    fontFamily: 'NotoSansKR_700Bold',
-    fontSize: 16,
-    color: colors.white,
   },
   pressed: {
     opacity: 0.85,

@@ -30,9 +30,9 @@ export class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <View style={styles.container} accessibilityRole="alert">
-          <Text style={styles.title}>잠시 문제가 발생했어요</Text>
+          <Text style={styles.title}>잠시 문제가 생겼어요</Text>
           <Text style={styles.body}>
-            앱을 다시 불러오거나, 홈에서 테스트를 다시 시작해 주세요.
+            다시 시도하거나, 홈에서 진단을 다시 시작해 주세요.
           </Text>
           <Pressable
             onPress={this.handleRetry}

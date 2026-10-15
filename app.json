@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "직장 동물 진단",
+    "name": "오피스 동물 진단",
     "slug": "workplace-animal-diagnosis",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,7 +8,7 @@
     "scheme": "workplaceanimaldiagnosis",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "description": "부하편·상사편 소통 성향을 동물 유형과 ___력 리포트로 진단하는 심리 테스트 앱. 회원가입 없이 바로 이용.",
+    "description": "부하편·상사편 소통 성향을 동물 유형과 ___력 리포트로 알아보는 가벼운 심리 진단 앱. 가입 없이 바로 이용.",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -19,7 +19,7 @@
       "bundleIdentifier": "com.minkyeom.workplaceanimaldiagnosis",
       "buildNumber": "1",
       "infoPlist": {
-        "CFBundleDisplayName": "직장 동물 진단",
+        "CFBundleDisplayName": "오피스 동물 진단",
         "NSPhotoLibraryAddUsageDescription": "결과 카드를 사진첩에 저장하기 위해 권한이 필요합니다.",
         "NSPhotoLibraryUsageDescription": "결과 카드를 사진첩에 저장하기 위해 권한이 필요합니다.",
         "ITSAppUsesNonExemptEncryption": false,

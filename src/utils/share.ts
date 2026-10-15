@@ -30,8 +30,8 @@ function buildShareText(animal: AnimalCharacter, abilities: AbilityScore[] = [])
     `나의 유형은 ${animal.emoji} ${animal.title}!`,
     `___력: ${abilityLine}`,
     '',
-    '유쾌한 직장 소통 심리 테스트 — 너는 어떤 동물일까?',
-    '※ 특정 인물을 비하하려는 목적이 아닌 소통 성향 테스트입니다.',
+    '오피스 동물 진단 — 나는 어떤 동물일까?',
+    '※ 특정 사람을 비하하려는 목적이 아닌 소통 성향 진단입니다.',
   ].join('\n');
 }
 
@@ -177,7 +177,7 @@ async function saveOnWeb(viewRef: RefObject<View | null>): Promise<boolean> {
 async function saveOnNative(viewRef: RefObject<View | null>): Promise<boolean> {
   const uri = await captureCard(viewRef);
   if (!uri) {
-    Alert.alert('저장 실패', '결과 카드를 캡처하지 못했어요. 화면을 잠시 둔 뒤 다시 시도해 주세요.');
+    Alert.alert('저장 실패', '결과 카드를 담지 못했어요. 잠시 후 다시 시도해 주세요.');
     return false;
   }
 
@@ -188,7 +188,7 @@ async function saveOnNative(viewRef: RefObject<View | null>): Promise<boolean> {
     if (!permission.granted) {
       Alert.alert(
         '권한 필요',
-        '결과 이미지를 사진첩에 저장하려면 권한이 필요해요. 설정에서 허용한 뒤 다시 시도하거나, 공유로 저장할 수 있어요.',
+        '사진첩에 저장하려면 권한이 필요해요. 설정에서 허용하거나, 공유로 저장해 주세요.',
         [
           { text: '취소', style: 'cancel' },
           {
@@ -209,7 +209,7 @@ async function saveOnNative(viewRef: RefObject<View | null>): Promise<boolean> {
       await MediaLibrary.saveToLibraryAsync(uri);
     }
 
-    Alert.alert('저장 완료', '결과 이미지가 사진첩에 저장되었어요.');
+    Alert.alert('저장 완료', '사진첩에 저장했어요.');
     return true;
   } catch (error) {
     const detail = error instanceof Error ? error.message : '';
@@ -217,8 +217,8 @@ async function saveOnNative(viewRef: RefObject<View | null>): Promise<boolean> {
     try {
       await shareImageNative(uri, '결과 이미지 저장/공유');
       Alert.alert(
-        '공유 시트로 열었어요',
-        '사진첩 직접 저장이 막혀서 공유 시트를 열었어요. 여기서 “이미지 저장” 또는 갤러리 앱을 골라 주세요.',
+        '공유 화면을 열었어요',
+        '직접 저장이 막혀 공유 화면을 열었어요. “이미지 저장” 또는 갤러리 앱을 골라 주세요.',
       );
       return true;
     } catch {

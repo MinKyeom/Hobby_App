@@ -29,7 +29,7 @@ export function ChoiceButton({ label, index, emoji, onPress }: Props) {
     <AnimatedPressable
       onPress={onPress}
       onPressIn={() => {
-        scale.value = withSpring(0.97);
+        scale.value = withSpring(0.98);
       }}
       onPressOut={() => {
         scale.value = withSpring(1);
@@ -42,9 +42,12 @@ export function ChoiceButton({ label, index, emoji, onPress }: Props) {
         <Text style={styles.badgeText}>{letter}</Text>
       </View>
       <View style={styles.textWrap}>
-        {emoji ? <Text style={styles.emoji}>{emoji}</Text> : null}
-        <Text style={styles.label}>{label}</Text>
+        <Text style={styles.label}>
+          {emoji ? `${emoji}  ` : ''}
+          {label}
+        </Text>
       </View>
+      <Text style={styles.chevron}>›</Text>
     </AnimatedPressable>
   );
 }
@@ -52,27 +55,27 @@ export function ChoiceButton({ label, index, emoji, onPress }: Props) {
 const styles = StyleSheet.create({
   button: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     gap: spacing.md,
     backgroundColor: colors.cream,
     borderRadius: radii.md,
     borderWidth: 1.5,
     borderColor: colors.line,
-    paddingVertical: spacing.md,
+    paddingVertical: 14,
     paddingHorizontal: spacing.md,
+    minHeight: 64,
     shadowColor: colors.shadow,
-    shadowOpacity: 0.18,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 3 },
     elevation: 2,
   },
   badge: {
-    width: 30,
-    height: 30,
+    width: 32,
+    height: 32,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 2,
   },
   badgeText: {
     fontFamily: 'NotoSansKR_700Bold',
@@ -81,15 +84,17 @@ const styles = StyleSheet.create({
   },
   textWrap: {
     flex: 1,
-    gap: 4,
-  },
-  emoji: {
-    fontSize: 18,
   },
   label: {
     fontFamily: 'NotoSansKR_400Regular',
     fontSize: 15,
-    lineHeight: 24,
+    lineHeight: 23,
     color: colors.ink,
+  },
+  chevron: {
+    fontFamily: 'NotoSansKR_700Bold',
+    fontSize: 22,
+    color: colors.accentSoft,
+    marginTop: -2,
   },
 });

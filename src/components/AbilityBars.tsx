@@ -13,7 +13,7 @@ export function AbilityBars({ abilities, roleLabel }: Props) {
     <View style={styles.wrap} accessibilityLabel={`${roleLabel} 능력치 리포트`}>
       <Text style={styles.heading}>{roleLabel} ___력 리포트</Text>
       <Text style={styles.sub}>
-        각 문항 선택으로 산출한 소통 능력치예요. 높낮이보다 “맞춤 팁”을 참고해 보세요.
+        선택에 따라 계산된 소통 능력치예요. 점수보다 아래 맞춤 팁을 참고해 보세요.
       </Text>
       {abilities.map((ability) => (
         <View key={ability.id} style={styles.row}>

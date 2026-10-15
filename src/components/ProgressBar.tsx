@@ -8,23 +8,31 @@ interface Props {
 }
 
 export function ProgressBar({ step }: Props) {
-  const ratio = Math.min(step / TOTAL_STEPS, 1);
-
   return (
     <View
       style={styles.wrap}
       accessibilityRole="progressbar"
-      accessibilityLabel={`질문 진행률 ${step} / ${TOTAL_STEPS}`}
+      accessibilityLabel={`질문 진행 ${step} / ${TOTAL_STEPS}`}
       accessibilityValue={{ min: 0, max: TOTAL_STEPS, now: step }}
     >
       <View style={styles.row}>
-        <Text style={styles.label}>질문</Text>
+        <Text style={styles.label}>진행</Text>
         <Text style={styles.count}>
-          {step}/{TOTAL_STEPS}
+          {step} / {TOTAL_STEPS}
         </Text>
       </View>
-      <View style={styles.track}>
-        <View style={[styles.fill, { width: `${ratio * 100}%` }]} />
+      <View style={styles.dots}>
+        {Array.from({ length: TOTAL_STEPS }, (_, i) => {
+          const n = i + 1;
+          const done = n < step;
+          const current = n === step;
+          return (
+            <View
+              key={n}
+              style={[styles.dot, done && styles.dotDone, current && styles.dotCurrent]}
+            />
+          );
+        })}
       </View>
     </View>
   );
@@ -49,15 +57,20 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.accent,
   },
-  track: {
+  dots: {
+    flexDirection: 'row',
+    gap: 6,
+  },
+  dot: {
+    flex: 1,
     height: 8,
     borderRadius: radii.pill,
     backgroundColor: colors.progressTrack,
-    overflow: 'hidden',
   },
-  fill: {
-    height: '100%',
-    borderRadius: radii.pill,
-    backgroundColor: colors.progressFill,
+  dotDone: {
+    backgroundColor: colors.accentSoft,
+  },
+  dotCurrent: {
+    backgroundColor: colors.accent,
   },
 });

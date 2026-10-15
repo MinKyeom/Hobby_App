@@ -4,7 +4,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 
 import { AbilityBars } from '@/components/AbilityBars';
 import type { AbilityScore } from '@/constants/abilities';
-import { APP_NAME_SHORT } from '@/constants/brand';
+import { APP_EDITIONS, APP_NAME_SHORT } from '@/constants/brand';
 import { colors, radii, spacing } from '@/constants/theme';
 import type { AnimalCharacter, Role } from '@/types/quiz';
 
@@ -35,7 +35,8 @@ export const ResultCard = forwardRef<View, Props>(function ResultCard(
   return (
     <View ref={ref} collapsable={false} style={styles.card}>
       <Text style={styles.brand}>{APP_NAME_SHORT}</Text>
-      <Text style={styles.kicker}>{roleLabel} · 웃긴 동물 진단 카드</Text>
+      <Text style={styles.editions}>{APP_EDITIONS}</Text>
+      <Text style={styles.kicker}>{roleLabel} 결과 카드</Text>
 
       <LinearGradient colors={[...artBg]} style={styles.imageWrap}>
         <View style={styles.sparkleRow}>
@@ -60,12 +61,12 @@ export const ResultCard = forwardRef<View, Props>(function ResultCard(
         </View>
       </LinearGradient>
 
-      <Text style={styles.intro}>당신은</Text>
+      <Text style={styles.intro}>당신의 유형은</Text>
       <Text style={styles.animalNameBig}>
         {animal.emoji} {animal.animalName}
       </Text>
       <Text style={styles.title}>{animal.title}</Text>
-      <Text style={styles.introTail}>이렇게 소통해 보면 더 편해져요!</Text>
+      <Text style={styles.introTail}>아래 팁을 참고해 소통해 보세요</Text>
       <View style={styles.tags}>
         {animal.tags.map((tag) => (
           <View key={tag} style={styles.tag}>
@@ -112,13 +113,22 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: colors.accent,
     textAlign: 'center',
+    lineHeight: 36,
+  },
+  editions: {
+    fontFamily: 'NotoSansKR_700Bold',
+    fontSize: 13,
+    color: colors.ink,
+    textAlign: 'center',
+    letterSpacing: 0.5,
+    marginTop: -2,
   },
   kicker: {
     fontFamily: 'NotoSansKR_500Medium',
     fontSize: 12,
     color: colors.inkMuted,
     textAlign: 'center',
-    marginTop: -4,
+    marginTop: 2,
   },
   imageWrap: {
     height: 300,
