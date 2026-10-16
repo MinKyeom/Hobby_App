@@ -2,6 +2,7 @@
   "expo": {
     "name": "오피스 동물 진단",
     "slug": "workplace-animal-diagnosis",
+    "owner": "minkowskim",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -61,6 +62,14 @@
         "android.permission.WRITE_CONTACTS",
         "android.permission.READ_PHONE_STATE",
         "com.google.android.gms.permission.AD_ID"
+      ],
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_VISUAL_USER_SELECTED",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.READ_MEDIA_AUDIO"
       ]
     },
     "web": {
@@ -95,13 +104,17 @@
     "extra": {
       "supportsRTL": false,
       "storeCompliance": {
-        "privacyPolicyUrl": "https://minkyeom.github.io/Hobby_App/privacy.html",
-        "supportUrl": "https://minkyeom.github.io/Hobby_App/support.html",
-        "licensesUrl": "https://minkyeom.github.io/Hobby_App/licenses.html",
+        "privacyPolicyUrl": "https://minkowskim.com/apps/office-animal-diagnosis/privacy",
+        "supportUrl": "https://minkowskim.com/apps/office-animal-diagnosis/support",
+        "licensesUrl": "https://minkowskim.com/apps/office-animal-diagnosis/licenses",
         "targetAgeMin": 18,
         "targetAudience": "adults-workplace",
         "containsAds": false,
         "dataCollection": "none-server"
+      },
+      "router": {},
+      "eas": {
+        "projectId": "bd287bca-e789-46be-b336-255b69afe234"
       }
     }
   }

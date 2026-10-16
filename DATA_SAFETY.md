@@ -34,7 +34,7 @@
 ## 배포 전 체크
 
 - [ ] `SUPPORT_EMAIL`을 실제 메일로 변경
-- [ ] `privacy.html` / `support.html` / `licenses.html` HTTPS 호스팅
-- [ ] Play Console·App Store Connect URL 등록
+- [ ] minkowskim.com 앱 전용 privacy/support/licenses HTTPS 호스팅
+- [ ] Play Console·App Store Connect URL 등록 (`play-store/DATA_SAFETY_ANSWERS.md` 참고)
 - [ ] 광고 포함 여부: **포함 안 함**
 - [ ] 대상 연령: **만 18세 이상 성인·직장인** (Families/아동 대상 아님)

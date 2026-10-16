@@ -27,12 +27,14 @@ npx expo start -c
 
 ## Play 출시 흐름
 
-1. `PLAY_STORE_LISTING.md` 문구 확인
-2. `SUPPORT_EMAIL` / `privacy.html` HTTPS 공개
-3. `eas init` → Android `preview`/`production` 빌드
-4. Play Console 내부 테스트 → 프로덕션
+1. **[play-store/README.md](./play-store/README.md)** — 그래픽·스크린샷·체크리스트·AAB 가이드
+2. 개인정보처리방침 HTTPS: `https://minkowskim.com/apps/office-animal-diagnosis/privacy`  
+   (생성 프롬프트: [PROMPTS/CREATE_PRIVACY_PAGE_ON_MINKOWSKIM.md](./PROMPTS/CREATE_PRIVACY_PAGE_ON_MINKOWSKIM.md))
+3. `SUPPORT_EMAIL`을 실제 메일로 변경
+4. `eas init` → `eas build --platform android --profile production` (.aab)
+5. Play Console 내부 테스트 → 프로덕션
 
-상세: [RELEASE_CHECKLIST.md](./RELEASE_CHECKLIST.md) · [PLAY_STORE_LISTING.md](./PLAY_STORE_LISTING.md)
+상세: [play-store/UPLOAD_CHECKLIST.md](./play-store/UPLOAD_CHECKLIST.md) · [RELEASE_CHECKLIST.md](./RELEASE_CHECKLIST.md)
 
 ## 구조
 

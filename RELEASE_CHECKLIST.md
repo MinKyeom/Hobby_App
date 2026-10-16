@@ -15,12 +15,13 @@
 ## B. 배포 전 필수 (직접 설정)
 
 - [ ] `SUPPORT_EMAIL`을 실제 메일로 변경 (`compliance.ts`, `public/*.html`)
-- [ ] `privacy.html` / `support.html` / `licenses.html` HTTPS 호스팅
+- [ ] minkowskim.com 앱 전용 개인정보 URL HTTPS 공개·접속 확인
 - [ ] `PRIVACY_POLICY_URL` · `SUPPORT_URL` · `LICENSES_URL` 실URL 확인
-- [ ] Play Console: Privacy · Data safety · 광고 없음 · 대상 연령 13+ · IARC 등급
+- [ ] Play Console: Privacy · Data safety · 광고 없음 · 대상 연령 **18+** · IARC 등급
+- [ ] `play-store/` 그래픽·스크린샷·LISTING_KO 업로드
 - [ ] App Store Connect: Privacy Policy · Support URL · App Privacy(Data Not Collected)
 - [ ] `npx eas-cli@latest init` 후 `extra.eas.projectId` 기록
-- [ ] 브랜드 아이콘 / 스플래시 / 스토어 스크린샷
+- [ ] `eas build --platform android --profile production` → AAB (Git 커밋 금지)
 - [ ] 실기기에서 저장·공유·권한 거부 시나리오
 - [ ] Expo Go가 아닌 **EAS preview/production** 빌드로 최종 확인
 

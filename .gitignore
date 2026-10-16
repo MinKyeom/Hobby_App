@@ -95,13 +95,29 @@ expo-env.d.ts
 # =========================
 # EAS / 스토어 빌드 산출물 (바이너리 → 금지)
 # eas.json 자체는 커밋 OK (비밀 없는 빌드 프로필)
+# play-store/graphics · screenshots · *.md 는 커밋 OK
 # =========================
 *.ipa
 *.apk
 *.aab
+*.apks
+*.obb
 *.dSYM.zip
 *.app.dSYM.zip
 build-*.tar.gz
+play-store/builds/**
+!play-store/builds/.gitkeep
+play-store/secrets/**
+!play-store/secrets/.gitkeep
+
+# 에셋 생성용 로컬 venv (재생성 가능)
+.venv-assets/
+.venv/
+
+# 로컬 캡처·미사용 원본 스크린샷 덤프
+play-store/screenshots/**/raw/
+play-store/screenshots/**/.device-capture/
+*.xcarchive/
 
 # =========================
 # 디버그 / 로그 / 커버리지

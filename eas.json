@@ -10,15 +10,23 @@
     },
     "preview": {
       "distribution": "internal",
-      "ios": {
-        "simulator": false
+      "android": {
+        "buildType": "app-bundle"
       }
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "android": {
+        "buildType": "app-bundle"
+      }
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "android": {
+        "track": "internal",
+        "releaseStatus": "draft"
+      }
+    }
   }
 }

@@ -44,19 +44,27 @@ Play Console → 대상 연령에서 **18세 이상만** 선택 (아동·Familie
 ## 필수 URL
 | 필드 | URL |
 |------|-----|
-| 개인정보처리방침 | https://minkyeom.github.io/Hobby_App/privacy.html |
-| (선택) 지원 | https://minkyeom.github.io/Hobby_App/support.html |
+| 개인정보처리방침 | https://minkowskim.com/apps/office-animal-diagnosis/privacy |
+| (선택) 지원 | https://minkowskim.com/apps/office-animal-diagnosis/support |
 
 ## 패키지명
 com.minkyeom.workplaceanimaldiagnosis
 
-## 내부 테스트 빌드
+## Play 업로드 키트
+그래픽·스크린샷·AAB 절차·체크리스트:
+
+→ **[play-store/README.md](./play-store/README.md)**
+
+## 내부 테스트 빌드 (.aab)
 ```bash
 cd Hobby_App
 npm install --legacy-peer-deps
 npx eas-cli@latest login
 npx eas-cli@latest init
 npx eas-cli@latest build --platform android --profile preview
+# 또는 프로덕션:
+# npx eas-cli@latest build --platform android --profile production
 ```
 
+상세: [play-store/AAB_BUILD.md](./play-store/AAB_BUILD.md)  
 Play Console → 내부 테스트 트랙에 AAB 업로드 후 테스터 이메일 추가.

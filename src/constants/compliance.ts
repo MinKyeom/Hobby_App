@@ -18,21 +18,24 @@ export const APP_PURPOSE =
  * 스토어 리스팅·문의용 — 배포 전 실제 이메일로 교체하세요.
  * App Store / Play Console의 지원·개인정보 연락처와 동일하게 맞춥니다.
  */
+/** 배포 전 실제 문의 메일로 교체하세요. */
 export const SUPPORT_EMAIL = 'support@example.com';
 
 /**
- * 스토어 제출 시 필수: GitHub Pages 등으로 HTTPS 공개 후
- * Play Console · App Store Connect에 등록하세요.
+ * Play Console 개인정보처리방침 (HTTPS 필수).
+ * minkowskim.com 앱 전용 경로 — 페이지 배포 후 브라우저에서 접속 확인.
+ * 생성 프롬프트: PROMPTS/CREATE_PRIVACY_PAGE_ON_MINKOWSKIM.md
  */
 export const PRIVACY_POLICY_URL =
-  'https://minkyeom.github.io/Hobby_App/privacy.html';
+  'https://minkowskim.com/apps/office-animal-diagnosis/privacy';
 
 /** Apple Support URL / Play 고객센터용 */
-export const SUPPORT_URL = 'https://minkyeom.github.io/Hobby_App/support.html';
+export const SUPPORT_URL =
+  'https://minkowskim.com/apps/office-animal-diagnosis/support';
 
 /** 이미지·오픈소스 고지 */
 export const LICENSES_URL =
-  'https://minkyeom.github.io/Hobby_App/licenses.html';
+  'https://minkowskim.com/apps/office-animal-diagnosis/licenses';
 
 /** 타깃 연령 — Play Console 대상 연령을 성인(18+)으로 설정 */
 export const TARGET_AGE_MIN = 18;

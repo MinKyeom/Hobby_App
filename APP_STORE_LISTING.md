@@ -26,8 +26,8 @@
 ## 필수 URL (App Store Connect)
 | 필드 | 값 |
 |------|-----|
-| Privacy Policy | https://minkyeom.github.io/Hobby_App/privacy.html |
-| Support URL | https://minkyeom.github.io/Hobby_App/support.html |
+| Privacy Policy | https://minkowskim.com/apps/office-animal-diagnosis/privacy |
+| Support URL | https://minkowskim.com/apps/office-animal-diagnosis/support |
 
 ## App Privacy
 → `DATA_SAFETY.md` 참고: **Data Not Collected**

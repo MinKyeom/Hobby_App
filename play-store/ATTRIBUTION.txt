@@ -1,0 +1,13 @@
+Play Store graphics, app icons, and marketing screenshots composite
+animal illustrations from assets/animals/illustrations/.
+
+Primary source in this project:
+  Microsoft Fluent Emoji — MIT License
+  https://github.com/microsoft/fluentui-emoji
+  Commercial use allowed (with copyright notice in app / THIRD_PARTY_NOTICES).
+
+If OpenMoji assets are used instead:
+  OpenMoji — CC BY-SA 4.0
+  https://openmoji.org/
+
+Layout / brand colors: Hobby_App (오피스 동물 진단).
